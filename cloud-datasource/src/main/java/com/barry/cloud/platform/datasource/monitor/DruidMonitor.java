@@ -2,13 +2,25 @@ package com.barry.cloud.platform.datasource.monitor;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 监控地址: http://ip:port/druid/
+ *
+ * */
+
 @Configuration
 public class DruidMonitor {
+
+    @Value("${druid.datasource.login.username}")
+    private String loginUsername;
+
+    @Value("${druid.datasource.login.password}")
+    private String loginPassword;
 
     /**
      * 注册一个StatViewServlet
@@ -27,8 +39,8 @@ public class DruidMonitor {
         /** IP黑名单 (存在共同时，deny优先于allow) : 如果满足deny的话提示:Sorry, you are not permitted to view this page. */
         servletRegistrationBean.addInitParameter("deny", "");
         /** 登录查看信息的账号密码. */
-        servletRegistrationBean.addInitParameter("loginUsername", "admin");
-        servletRegistrationBean.addInitParameter("loginPassword", "admin");
+        servletRegistrationBean.addInitParameter("loginUsername", loginUsername);
+        servletRegistrationBean.addInitParameter("loginPassword", loginPassword);
         /** 是否能够重置数据. */
         servletRegistrationBean.addInitParameter("resetEnable", "false");
         return servletRegistrationBean;
