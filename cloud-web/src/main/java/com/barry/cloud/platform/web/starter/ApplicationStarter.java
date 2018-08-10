@@ -1,6 +1,5 @@
 package com.barry.cloud.platform.web.starter;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -15,8 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
  *
  */
 @SpringBootApplication
-@ComponentScan(basePackages={"com.bmw.azure.oauth2"})
-@MapperScan("com.bmw.azure.oauth2.mapper")
+@ComponentScan(basePackages={"com.barry.cloud.platform"})
 @ServletComponentScan
 public class ApplicationStarter {
 
