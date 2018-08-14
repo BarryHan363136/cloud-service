@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.barry.cloud.platform.web.mapper.sys.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.barry.cloud.platform.web.entity.sys.Role" >
+    <id column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="rele_name" property="releName" jdbcType="VARCHAR" />
+    <result column="describe" property="describe" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    role_id, rele_name, describe
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from spark_shiro_role
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from spark_shiro_role
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.barry.cloud.platform.web.entity.sys.Role" >
+    insert into spark_shiro_role (role_id, rele_name, describe
+      )
+    values (#{roleId,jdbcType=BIGINT}, #{releName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.barry.cloud.platform.web.entity.sys.Role" >
+    insert into spark_shiro_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="releName != null" >
+        rele_name,
+      </if>
+      <if test="describe != null" >
+        describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="releName != null" >
+        #{releName,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.barry.cloud.platform.web.entity.sys.Role" >
+    update spark_shiro_role
+    <set >
+      <if test="releName != null" >
+        rele_name = #{releName,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.barry.cloud.platform.web.entity.sys.Role" >
+    update spark_shiro_role
+    set rele_name = #{releName,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+</mapper>

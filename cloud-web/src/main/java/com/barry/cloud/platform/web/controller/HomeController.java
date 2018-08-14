@@ -1,6 +1,5 @@
 package com.barry.cloud.platform.web.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,17 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @Description:
  * @date 2018/8/10 17:50
  */
-@Controller
+@RestController
 public class HomeController {
 
-//    @GetMapping(value = "/")
-//    public ModelAndView index(){
-//        return new ModelAndView("views/login");
-//    }
-
     @GetMapping(value = "/")
-    public String index(){
-        return "/login";
+    public ModelAndView index(){
+        return new ModelAndView("login");
     }
+
 
 }

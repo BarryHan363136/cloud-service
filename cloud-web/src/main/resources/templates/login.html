@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title,cssPaths)">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/system/style.css}" />
+    <script th:src="@{/libs/js/jquery.js}"></script>
+    <script th:src="@{/libs/js/form/placeholder.js}"></script>
+</head>
+<body>
+<div class="win">
+    <div class="login_win">
+        <div class="login_title"></div>
+        <form id="iform" th:action="@{/login}" th:method="post" class="form_win">
+            <div class="form_title">
+                <span>用户登录</span>
+            </div>
+            <div class="user">
+                <i></i><input type="text" name="userName" id="userName" placeholder="账号/手机号" />
+            </div>
+            <div class="passerword">
+                <i></i><input type="password" name="password" id="password" placeholder="密码" />
+            </div>
+            <div class="remember clear">
+                <a href="javascript:;">忘记密码？</a>
+            </div>
+            <input type="submit" value="登 录" class="submit"/>
+            <!--<div class="login_copy">-->
+                <!--<a href="http://www.uileader.com" target="_blank"></a>-->
+            <!--</div>-->
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,8 +1,10 @@
 package com.barry.cloud.platform.web.starter;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -15,8 +17,9 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages={"com.barry.cloud.platform"})
+@MapperScan("com.barry.cloud.platform.web.mapper")
 @ServletComponentScan
-public class ApplicationStarter {
+public class ApplicationStarter extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(ApplicationStarter.class, args);
