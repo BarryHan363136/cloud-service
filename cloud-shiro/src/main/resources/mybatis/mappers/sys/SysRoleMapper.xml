@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.barry.cloud.platform.shiro.mapper.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.barry.cloud.platform.shiro.entity.SysRole" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="available" property="available" jdbcType="TINYINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, available, description, role
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.barry.cloud.platform.shiro.entity.SysRole" >
+    insert into sys_role (id, available, description, 
+      role)
+    values (#{id,jdbcType=BIGINT}, #{available,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.barry.cloud.platform.shiro.entity.SysRole" >
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="available != null" >
+        available,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.barry.cloud.platform.shiro.entity.SysRole" >
+    update sys_role
+    <set >
+      <if test="available != null" >
+        available = #{available,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.barry.cloud.platform.shiro.entity.SysRole" >
+    update sys_role
+    set available = #{available,jdbcType=TINYINT},
+      description = #{description,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+
+  <select id="findRolesByUserInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+      SELECT a.* from sys_role a
+      LEFT JOIN sys_user_role b on a.id = b.role_id
+      LEFT JOIN user_info c on b.uid = c.uid
+      where 1 = 1
+    <if test="userName != null and userName !='' " >
+      and c.username = #{userName}
+    </if>
+  </select>
+
+
+
+
+
+</mapper>

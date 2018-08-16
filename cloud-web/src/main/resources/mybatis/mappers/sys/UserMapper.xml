@@ -207,4 +207,18 @@
       remark = #{remark,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
+
+  <select id="findResults" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    <![CDATA[
+     select * from spark_shiro_user
+     ]]>
+  </select>
+
+  <select id="findUser" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    <![CDATA[
+     select * from spark_shiro_user
+     where user_name = #{userName}
+     ]]>
+  </select>
+
 </mapper>

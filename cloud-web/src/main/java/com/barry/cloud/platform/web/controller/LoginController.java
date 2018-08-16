@@ -15,10 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class LoginController {
 
-    @PostMapping(value = "/login")
-    public ModelAndView index(){
-        return new ModelAndView("main");
-    }
+//    @PostMapping(value = "/login")
+//    public ModelAndView index(){
+//        return new ModelAndView("main");
+//    }
 
     @GetMapping(value = "/homepage")
     public ModelAndView homepage(){

@@ -1,0 +1,46 @@
+.maingrid_content{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    border: 1px solid #EEEEEE;
+    z-index: 99999;
+    margin-right: -100%;
+    box-shadow: -1px 0 3px #d3d8db;
+    display: none;
+}
+
+.oppContent{
+    width: 340px;
+    height: 40px;
+    float: left;
+}
+.searchContent{
+    width: 440px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
