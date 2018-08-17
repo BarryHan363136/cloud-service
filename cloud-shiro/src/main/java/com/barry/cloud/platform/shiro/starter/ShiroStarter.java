@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * TaskApplication [spring boot] 主方法
@@ -16,8 +17,9 @@ import org.springframework.context.annotation.ComponentScan;
  *
  */
 @SpringBootApplication
-@ComponentScan(basePackages={"com.barry.cloud.platform"})
+@ComponentScan(basePackages={"com.barry.cloud.platform.shiro"})
 @MapperScan("com.barry.cloud.platform.shiro.mapper")
+@EnableTransactionManagement
 @ServletComponentScan
 public class ShiroStarter extends SpringBootServletInitializer {
 

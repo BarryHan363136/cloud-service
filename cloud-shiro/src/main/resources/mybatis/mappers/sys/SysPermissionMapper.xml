@@ -125,4 +125,25 @@
       url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+
+
+  <select id="SysPermissionMapper" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select a.* from sys_permission a
+    LEFT JOIN sys_role_permission b on a.id = b.permission_id
+    LEFT JOIN sys_role c on b.role_id = c.id
+    WHERE 1 = 1
+    <if test="roleId != null and roleId !='' " >
+      and c.id = #{roleId}
+    </if>
+    <if test="available != null and available !='' " >
+      and c.available = #{available}
+    </if>
+  </select>
+
+
+
+
+
 </mapper>

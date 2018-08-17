@@ -115,7 +115,7 @@
      ]]>
   </select>
 
-  <select id="findUser" resultMap="BaseResultMap" parameterType="java.util.Map" >
+  <select id="findByUsername" resultMap="BaseResultMap" parameterType="java.util.Map" >
     <![CDATA[
      select * from user_info
      where username = #{userName}

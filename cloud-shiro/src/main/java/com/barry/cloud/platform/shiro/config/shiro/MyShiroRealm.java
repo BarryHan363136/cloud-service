@@ -1,8 +1,10 @@
 package com.barry.cloud.platform.shiro.config.shiro;
 
+import com.barry.cloud.platform.common.parse.json.JSONMapper;
 import com.barry.cloud.platform.shiro.entity.SysPermission;
 import com.barry.cloud.platform.shiro.entity.SysRole;
 import com.barry.cloud.platform.shiro.entity.UserInfo;
+import com.barry.cloud.platform.shiro.service.SysPermissionService;
 import com.barry.cloud.platform.shiro.service.SysRoleService;
 import com.barry.cloud.platform.shiro.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,17 +34,28 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Resource
     private SysRoleService sysRoleService;
 
+    @Resource
+    private SysPermissionService sysPermissionService;
+
+    /**
+     * 根据用户的权限信息做授权判断，这一步是以doGetAuthenticationInfo为基础的，
+     * 只有在有用户信息后才能根据用户的角色和授权信息做判断是否给用户授权，因此这里的Roles和Permissions是用户的两个重点判断依据
+     * */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         log.info("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         UserInfo userInfo  = (UserInfo)principals.getPrimaryPrincipal();
+        log.info("=============>加载权限设置:"+JSONMapper.writeObjectAsString(userInfo));
         List<SysRole> roleList = sysRoleService.findRolesByUserName(null);
         if (roleList!=null && !roleList.isEmpty()){
             for(SysRole role : roleList){
                 authorizationInfo.addRole(role.getRole());
-                for(SysPermission p : role.getPermissions()){
-                    authorizationInfo.addStringPermission(p.getPermission());
+                List<SysPermission> permissionList = sysPermissionService.findPermissionByRoleInfo(null);
+                if (permissionList!=null && !permissionList.isEmpty()){
+                    for(SysPermission p : permissionList){
+                        authorizationInfo.addStringPermission(p.getPermission());
+                    }
                 }
             }
         }
@@ -50,7 +63,8 @@ public class MyShiroRealm extends AuthorizingRealm {
     }
 
     /**
-     * 主要是用来进行身份认证的，也就是说验证用户输入的账号和密码是否正确。
+     * 主要是用来进行身份认证的，也就是说验证用户输入的账号和密码是否正确
+     * 获取用户的权限信息，这是为下一步的授权做判断，获取当前用户的角色和这些角色所拥有的权限信息
      * */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
