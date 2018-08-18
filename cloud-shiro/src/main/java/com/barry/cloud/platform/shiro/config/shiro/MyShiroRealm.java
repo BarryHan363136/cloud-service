@@ -47,7 +47,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         UserInfo userInfo  = (UserInfo)principals.getPrimaryPrincipal();
         log.info("=============>加载权限设置:"+JSONMapper.writeObjectAsString(userInfo));
-        List<SysRole> roleList = sysRoleService.findRolesByUserName(null);
+        List<SysRole> roleList = sysRoleService.findRolesByUserInfo(null);
         if (roleList!=null && !roleList.isEmpty()){
             for(SysRole role : roleList){
                 authorizationInfo.addRole(role.getRole());
