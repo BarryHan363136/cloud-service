@@ -15,7 +15,7 @@ import java.util.Map;
  * @Description:
  * @date 2018/8/17 10:25
  */
-@Service
+@Service("sysPermissionService")
 public class SysPermissionServiceImpl implements SysPermissionService {
 
     @Autowired

@@ -5,8 +5,6 @@ import com.barry.cloud.platform.shiro.mapper.SysRoleMapper;
 import com.barry.cloud.platform.shiro.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +20,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysRoleMapper sysRoleMapper;
 
     @Override
-    public List<SysRole> findRolesByUserName(String userName) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("userName", userName);
+    public List<SysRole> findRolesByUserInfo(Map<String, Object> map) {
         return sysRoleMapper.findRolesByUserInfo(map);
     }
 

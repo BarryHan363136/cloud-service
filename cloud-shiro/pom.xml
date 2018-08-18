@@ -128,6 +128,12 @@
             <version>${shiro.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>${nekohtml.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

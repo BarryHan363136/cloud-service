@@ -129,7 +129,7 @@
 
 
 
-  <select id="SysPermissionMapper" resultMap="BaseResultMap" parameterType="java.util.Map" >
+  <select id="findPermissionByRoleInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select a.* from sys_permission a
     LEFT JOIN sys_role_permission b on a.id = b.permission_id
     LEFT JOIN sys_role c on b.role_id = c.id

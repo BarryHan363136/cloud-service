@@ -89,8 +89,8 @@
       LEFT JOIN sys_user_role b on a.id = b.role_id
       LEFT JOIN user_info c on b.uid = c.uid
       where 1 = 1
-    <if test="userName != null and userName !='' " >
-      and c.username = #{userName}
+    <if test="userId != null and userId !='' " >
+      and c.ui = #{userId}
     </if>
   </select>
 
