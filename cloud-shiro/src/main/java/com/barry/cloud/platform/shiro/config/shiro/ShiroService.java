@@ -26,11 +26,6 @@ public class ShiroService {
     @Resource
     private SysPermissionService sysPermissionService;
 
-  /*
-    @Autowired
-    private RedisSessionDAO redisSessionDAO;
-    */
-
     /**
      * 初始化权限
      */
@@ -57,18 +52,14 @@ public class ShiroService {
      * 重新加载权限
      */
     public void updatePermission() {
-
         synchronized (shiroFilterFactoryBean) {
-
             AbstractShiroFilter shiroFilter = null;
             try {
                 shiroFilter = (AbstractShiroFilter) shiroFilterFactoryBean
                         .getObject();
             } catch (Exception e) {
-                throw new RuntimeException(
-                        "get ShiroFilter from shiroFilterFactoryBean error!");
+                throw new RuntimeException("get ShiroFilter from shiroFilterFactoryBean error!");
             }
-
             PathMatchingFilterChainResolver filterChainResolver = (PathMatchingFilterChainResolver) shiroFilter
                     .getFilterChainResolver();
             DefaultFilterChainManager manager = (DefaultFilterChainManager) filterChainResolver
