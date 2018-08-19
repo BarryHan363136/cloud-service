@@ -2,6 +2,7 @@ package com.barry.cloud.platform.shiro.service;
 
 import com.barry.cloud.platform.shiro.entity.SysPermission;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Tongshan.Han@partner.bmw.com
@@ -10,6 +11,8 @@ import java.util.List;
  */
 public interface SysPermissionService {
 
-    public List<SysPermission> findPermissionByRoleInfo(String roleId);
+    public List<SysPermission> findResults(Map<String, Object> map);
+
+    public List<SysPermission> findPermissionByRoleInfo(Map<String, Object> map);
 
 }

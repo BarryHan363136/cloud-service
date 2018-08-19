@@ -5,8 +5,6 @@ import com.barry.cloud.platform.shiro.mapper.SysPermissionMapper;
 import com.barry.cloud.platform.shiro.service.SysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +20,12 @@ public class SysPermissionServiceImpl implements SysPermissionService {
     private SysPermissionMapper sysPermissionMapper;
 
     @Override
-    public List<SysPermission> findPermissionByRoleInfo(String roleId) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("roleId", roleId);
+    public List<SysPermission> findResults(Map<String, Object> map) {
+        return sysPermissionMapper.findResults(map);
+    }
+
+    @Override
+    public List<SysPermission> findPermissionByRoleInfo(Map<String, Object> map) {
         return sysPermissionMapper.findPermissionByRoleInfo(map);
     }
 

@@ -1,28 +1,32 @@
 package com.barry.cloud.platform.shiro.config.shiro;
 
+import com.barry.cloud.platform.shiro.entity.SysPermission;
+import com.barry.cloud.platform.shiro.service.SysPermissionService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import javax.annotation.Resource;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 @Slf4j
 @Configuration
+@AutoConfigureAfter(ShiroLifecycleBeanPostProcessorConfig.class)
 public class ShiroConfig {
 
-	@Bean(name = "lifecycleBeanPostProcessor")
-	public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-		return new LifecycleBeanPostProcessor();
-	}
+	@Resource
+	private SysPermissionService sysPermissionService;
 
 	@Bean
 	public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
@@ -50,6 +54,21 @@ public class ShiroConfig {
 		 * 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了
 		 * authc:所有url都必须认证通过才可以访问; anon:所有url都可以匿名访问
 		 * */
+
+
+		List<SysPermission> permissionList = sysPermissionService.findResults(null);
+		if (permissionList!=null && !permissionList.isEmpty()){
+			for(SysPermission sysPermission : permissionList){
+				if (StringUtils.isNotEmpty(sysPermission.getUrl())) {
+					String permission = "perms[" + sysPermission.getUrl()+ "]";
+					filterChainDefinitionMap.put(sysPermission.getUrl(), permission);
+				}
+			}
+		}
+
+
+
+
 		filterChainDefinitionMap.put("/**", "authc");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;

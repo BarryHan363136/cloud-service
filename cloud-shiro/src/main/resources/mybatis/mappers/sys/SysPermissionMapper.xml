@@ -127,18 +127,23 @@
   </update>
 
 
-
+  <select id="findResults" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select * from sys_permission where 1 = 1
+    <if test="available != null and available !='' " >
+      and available = #{available}
+    </if>
+  </select>
 
   <select id="findPermissionByRoleInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select a.* from sys_permission a
     LEFT JOIN sys_role_permission b on a.id = b.permission_id
-    LEFT JOIN sys_role c on b.role_id = c.id
+    LEFT JOIN sys_user_role c on b.role_id = c.role_id
     WHERE 1 = 1
-    <if test="roleId != null and roleId !='' " >
-      and c.id = #{roleId}
+    <if test="userId != null and userId !='' " >
+      AND c.uid = #{userId}
     </if>
     <if test="available != null and available !='' " >
-      and c.available = #{available}
+      and a.available = #{available}
     </if>
   </select>
 

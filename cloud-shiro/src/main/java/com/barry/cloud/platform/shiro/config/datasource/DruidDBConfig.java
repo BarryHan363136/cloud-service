@@ -1,6 +1,7 @@
 package com.barry.cloud.platform.shiro.config.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.support.http.WebStatFilter;
 import com.barry.cloud.platform.shiro.properties.DSProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -63,6 +65,15 @@ public class DruidDBConfig {
             log.error("druid configuration initialization error {} ", e);
             return null;
         }
+    }
+
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new WebStatFilter());
+        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        return filterRegistrationBean;
     }
 
 }
