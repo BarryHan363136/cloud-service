@@ -18,11 +18,6 @@ import java.util.Map;
 @Controller
 public class HomeController {
 
-    @RequestMapping({"/"})
-    public String toLogin(){
-        return"/login";
-    }
-
     @RequestMapping({"/turnLogin"})
     public String turnLogin(){
         return"/login";
