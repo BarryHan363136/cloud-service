@@ -136,18 +136,18 @@
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
-            <version>2.0.3</version>
+            <version>${mapper.version}</version>
         </dependency>
         <dependency>
             <groupId>org.crazycake</groupId>
             <artifactId>shiro-redis</artifactId>
-            <version>3.1.0</version>
+            <version>${shiro-redis.version}</version>
         </dependency>
 
     </dependencies>
 
     <build>
-        <finalName>cloud-web</finalName>
+        <finalName>cloud-shiro</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
