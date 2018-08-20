@@ -27,5 +27,6 @@ public class DBProperties {
     private int maxPoolPreparedStatementPerConnectionSize;
     private String filters;
     private String connectionProperties;
+    private String logSlowSql;
 
 }
