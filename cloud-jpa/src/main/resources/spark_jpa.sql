@@ -4,7 +4,7 @@ Navicat MySQL Data Transfer
 Source Server         : Local-VM128
 Source Server Version : 50723
 Source Host           : 192.168.33.128:3306
-Source Database       : spark_security
+Source Database       : spark_jpa.sql
 
 Target Server Type    : MYSQL
 Target Server Version : 50723
