@@ -28,6 +28,8 @@
         <shiro-redis.version>3.1.0</shiro-redis.version>
         <jjwt.version>0.9.1</jjwt.version>
         <pagehelper.version>1.2.5</pagehelper.version>
+        <collections4.version>4.2</collections4.version>
+        <persistence.version>1.0.2</persistence.version>
     </properties>
 
     <dependencyManagement>
