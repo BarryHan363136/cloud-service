@@ -2,7 +2,6 @@ package com.barry.cloud.platform.security.jwt.service;
 
 import com.barry.cloud.platform.common.parse.json.JSONMapper;
 import com.barry.cloud.platform.security.jwt.base.BaseTest;
-import com.barry.cloud.platform.security.jwt.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -20,6 +20,7 @@ public class Staff implements Serializable {
     @Id
     //@SequenceGenerator(name = "staff_generator", sequenceName = "staff_sequence", initialValue = 100)
     //@GeneratedValue(generator = "staff_generator")
+    //@GeneratedValue(strategy=GenerationType.IDENTITY)  // id自增
     @GeneratedValue
     private Long id;
 

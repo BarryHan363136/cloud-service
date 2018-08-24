@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author Tongshan.Han@partner.bmw.com
  * @Description:
@@ -31,6 +33,17 @@ public class StaffController {
         staff.setUserName(userName);
         staff.setRealName(realName);
         return staffService.findAll(staff, null, null);
+    }
+
+    @GetMapping("/results")
+    public Page<Staff> results(@RequestParam(value = "userName", required = false) String userName,
+                               @RequestParam(value = "realName", required = false) String realName,
+                               @RequestParam(value = "id", required = false) String id) {
+        Staff staff = new Staff();
+        staff.setId(StringUtils.isBlank(id) ? null :Long.parseLong(id));
+        staff.setUserName(userName);
+        staff.setRealName(realName);
+        return staffService.findResult(staff, null, null);
     }
 
     @GetMapping("/findOne")

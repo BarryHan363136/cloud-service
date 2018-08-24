@@ -1,15 +1,10 @@
 package com.barry.cloud.platform.security.jwt.mapper;
 
 import com.barry.cloud.platform.common.mapper.RepositoryMapper;
-import com.barry.cloud.platform.security.jwt.entity.User;
-import org.apache.ibatis.annotations.*;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import java.util.List;
-import java.util.Map;
 
 @Repository
-public interface UserMapper extends RepositoryMapper<User> {
+public interface DemoMapper extends RepositoryMapper<User> {
 
 //    @Select("select account_id as accountId, account_name as accountName from account where account_id = #{accountId}")
 //    User findById(@Param("accountId") Long accountId);
@@ -61,5 +56,11 @@ public interface UserMapper extends RepositoryMapper<User> {
 //    @ResultMap("accountResultTest")
 //    @Select("select * from spark_user")
 //    List<User> selectAll();
+    /**
+     * PageHelper.startPage(apps.getPageNum(), apps.getPageSize());
+     *     ArrayList<Apps> appsList = appsService.getApps(apps);
+     *     PageInfo<Apps> appsPageInfo = new PageInfo<>(appsList);
+     *     return JSON.toJSONString(appsPageInfo);
+     * */
 
 }

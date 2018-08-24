@@ -2,6 +2,7 @@ package com.barry.cloud.platform.jpa.dao;
 
 import com.barry.cloud.platform.jpa.entity.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @date 2018/8/20 14:26
  */
 @Repository
-public interface StaffRepository extends JpaRepository<Staff, Long> {
+public interface StaffRepository extends JpaRepository<Staff, Long>, JpaSpecificationExecutor<Staff> {
 
     /**
      * 根据userName获取staff
@@ -25,6 +26,5 @@ public interface StaffRepository extends JpaRepository<Staff, Long> {
      */
     @Query(value = "select * from spark_staff where userName = ?1", nativeQuery = true)
     List<Staff> findByUserName(String userName);
-
 
 }

@@ -1,20 +1,16 @@
 package com.barry.cloud.platform.security.jwt.entity;
 
 import lombok.Data;
-
-import javax.persistence.Table;
+import java.util.Date;
+import java.util.List;
 
 @Data
-@Table(name="spark_user")
 public class User {
 
-    private Long id;
-
-    private String userName;
-
-    private String userPwd;
-
-    private String realName;
-
-
+    private String id;
+    private String username;
+    private String password;
+    private String email;
+    private Date lastPasswordResetDate;
+    private List<String> roles;
 }

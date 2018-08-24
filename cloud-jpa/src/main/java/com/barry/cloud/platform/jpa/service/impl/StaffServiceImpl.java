@@ -6,7 +6,10 @@ import com.barry.cloud.platform.jpa.service.StaffService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +22,43 @@ public class StaffServiceImpl implements StaffService {
 
     @Autowired
     private StaffRepository staffRepository;
+
+    @Override
+    public Page<Staff> findResult(Staff staff, Integer pageNumber, Integer pageSize) {
+        if(pageNumber==null) pageNumber=1;
+        if(pageSize==null) pageSize=10;
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of((pageNumber-1), pageSize, sort);
+        Page<Staff> staffPage = staffRepository.findAll(new Specification<Staff>() {
+            @Override
+            public Predicate toPredicate(Root<Staff> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                /**
+                 * 连接查询条件, 不定参数，可以连接0..N个查询条件
+                 * 查询条件比对方式:
+                 * 1. criteriaBuilder.equal
+                 * 2. criteriaBuilder.between
+                 * 3. criteriaBuilder.lessThan
+                 * 4. criteriaBuilder.greaterThan
+                 *
+                 */
+                List<Predicate> predicateList = new ArrayList<>();
+                if (staff.getId()!=null){
+                    Path<String> dbTid = root.get("id");
+                    predicateList.add(criteriaBuilder.equal(dbTid, staff.getId()));
+                }
+                if (StringUtils.isNotBlank(staff.getUserName())){
+                    Path<String> userName = root.get("userName");
+                    predicateList.add(criteriaBuilder.equal(userName, staff.getUserName()));
+                }
+                if (StringUtils.isNotBlank(staff.getRealName())){
+                    Path<String> realName = root.get("realName");
+                    predicateList.add(criteriaBuilder.equal(realName, staff.getRealName()));
+                }
+                return null;
+            }
+        }, pageable);
+        return staffPage;
+    }
 
     @Override
     public Staff save(Staff user) {
@@ -36,7 +76,7 @@ public class StaffServiceImpl implements StaffService {
             matcher.withMatcher("userName", ExampleMatcher.GenericPropertyMatchers.contains());
         }
         if (StringUtils.isNotBlank(staff.getRealName())){
-            matcher.withMatcher("realName", ExampleMatcher.GenericPropertyMatchers.contains());
+            matcher.withMatcher("realName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.valueOf(staff.getRealName())));
         }
         /**
          * 忽略属性：是否关注。因为是基本类型，需要忽略掉

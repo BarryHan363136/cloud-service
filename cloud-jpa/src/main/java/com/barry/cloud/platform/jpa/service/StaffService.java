@@ -2,6 +2,7 @@ package com.barry.cloud.platform.jpa.service;
 
 import com.barry.cloud.platform.jpa.entity.Staff;
 import org.springframework.data.domain.Page;
+import java.util.List;
 
 /**
  * @author Tongshan.Han@partner.bmw.com
@@ -13,6 +14,8 @@ public interface StaffService {
     Staff save(Staff user);
 
     Page<Staff> findAll(Staff staff, Integer pageNumber, Integer pageSize);
+
+    Page<Staff> findResult(Staff staff, Integer pageNumber, Integer pageSize);
 
     Staff findOne(String userName);
 
