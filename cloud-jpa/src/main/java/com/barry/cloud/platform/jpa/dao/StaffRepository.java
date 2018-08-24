@@ -27,4 +27,16 @@ public interface StaffRepository extends JpaRepository<Staff, Long>, JpaSpecific
     @Query(value = "select * from spark_staff where userName = ?1", nativeQuery = true)
     List<Staff> findByUserName(String userName);
 
+    /**
+     * @Query(value ="select * from employee c "
+     *             + "where (c.emp_num=?1 or ?1 is null) and (c.status=?2 or ?2 is null) "
+     *             + "order by c.lastupdatetime desc  limit ?3,?4 ",nativeQuery = true)
+     *     List<Employee> findAllList(String empNum,String status,Integer pageNumber,Integer pageSize);
+     *
+     *     @Query(value ="select count(*) from employee c "
+     *             + "where (c.emp_num=?1 or ?1 is null) and (c.status=?2 or ?2 is null) "
+     *             + "order by c.lastupdatetime desc ",nativeQuery = true)
+     *     Integer countAllList(String empNum,String status);
+     * */
+
 }

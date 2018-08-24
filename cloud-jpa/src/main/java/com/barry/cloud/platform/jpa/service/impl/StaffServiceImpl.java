@@ -6,6 +6,7 @@ import com.barry.cloud.platform.jpa.service.StaffService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import javax.persistence.criteria.*;
@@ -54,6 +55,9 @@ public class StaffServiceImpl implements StaffService {
                     Path<String> realName = root.get("realName");
                     predicateList.add(criteriaBuilder.equal(realName, staff.getRealName()));
                 }
+                Predicate[] predicates = new Predicate[predicateList.size()];
+                predicateList.toArray(predicates);
+                criteriaQuery.where(predicates);
                 return null;
             }
         }, pageable);
@@ -67,17 +71,30 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Page<Staff> findAll(Staff staff, Integer pageNumber, Integer pageSize) {
-        /** 创建匹配器，即如何使用查询条件 */
-        ExampleMatcher matcher = ExampleMatcher.matching();
-        if (staff.getId()!=null){
-            matcher.withMatcher("id", ExampleMatcher.GenericPropertyMatchers.contains());
-        }
-        if (StringUtils.isNotBlank(staff.getUserName())){
-            matcher.withMatcher("userName", ExampleMatcher.GenericPropertyMatchers.contains());
-        }
-        if (StringUtils.isNotBlank(staff.getRealName())){
-            matcher.withMatcher("realName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.valueOf(staff.getRealName())));
-        }
+        /**
+         * 创建匹配器，即如何使用查询条件
+         * 查询条件匹配方式:
+         * 1.ExampleMatcher.GenericPropertyMatchers.startsWith() -> %{name}
+         * 2.ExampleMatcher.GenericPropertyMatchers.endsWith() -> {name}%
+         * 3.ExampleMatcher.GenericPropertyMatchers.contains() -> %{name}%
+         *  */
+//        ExampleMatcher matcher = ExampleMatcher.matching();
+//        if (staff.getId()!=null){
+//            matcher.withMatcher("id", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.valueOf(staff.getId().toString())));
+//        }
+//        if (StringUtils.isNotBlank(staff.getUserName())){
+//            matcher.withMatcher("userName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.valueOf(staff.getUserName())));
+//        }
+//        if (StringUtils.isNotBlank(staff.getRealName())){
+//            matcher.withMatcher("realName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.valueOf(staff.getRealName())));
+//        }
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+        .withMatcher("id", ExampleMatcher.GenericPropertyMatcher.of(StringMatcher.DEFAULT))
+        .withMatcher("userName", ExampleMatcher.GenericPropertyMatcher.of(StringMatcher.DEFAULT))
+        .withMatcher("realName", ExampleMatcher.GenericPropertyMatcher.of(StringMatcher.DEFAULT))
+        .withIgnoreCase("password");
+
         /**
          * 忽略属性：是否关注。因为是基本类型，需要忽略掉
          * .withIgnorePaths("id")

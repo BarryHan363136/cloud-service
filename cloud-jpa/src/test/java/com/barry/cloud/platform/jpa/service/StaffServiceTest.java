@@ -21,6 +21,7 @@ public class StaffServiceTest extends BaseTest {
     @Test
     public void testSaveStaff(){
         Staff staff = new Staff();
+        staff.setId(1000L);
         staff.setUserName("zhangsan");
         staff.setPassword("123456");
         staff.setRealName("张三");
