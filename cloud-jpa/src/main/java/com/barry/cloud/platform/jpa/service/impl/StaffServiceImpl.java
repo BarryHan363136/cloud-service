@@ -40,6 +40,7 @@ public class StaffServiceImpl implements StaffService {
                  * 2. criteriaBuilder.between
                  * 3. criteriaBuilder.lessThan
                  * 4. criteriaBuilder.greaterThan
+                 * 5. criteriaBuilder.like(countryPath, "%武汉%")
                  *
                  */
                 List<Predicate> predicateList = new ArrayList<>();

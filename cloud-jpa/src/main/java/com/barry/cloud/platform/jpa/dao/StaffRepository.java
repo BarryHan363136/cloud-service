@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -38,5 +41,13 @@ public interface StaffRepository extends JpaRepository<Staff, Long>, JpaSpecific
      *             + "order by c.lastupdatetime desc ",nativeQuery = true)
      *     Integer countAllList(String empNum,String status);
      * */
+
+//    @PersistenceContext
+//    private EntityManager entityManager;
+//    @Override
+//    public List<Staff> findAll() {
+//        return this.entityManager.createQuery("SELECT t FROM spark_staff t", Staff.class)
+//                .getResultList();
+//    }
 
 }
