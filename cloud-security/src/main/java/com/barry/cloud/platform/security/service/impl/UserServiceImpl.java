@@ -1,5 +1,6 @@
 package com.barry.cloud.platform.security.service.impl;
 
+import com.barry.cloud.platform.common.id.IdWorker;
 import com.barry.cloud.platform.security.config.security.JwtTokenUtil;
 import com.barry.cloud.platform.security.dao.UserRepository;
 import com.barry.cloud.platform.security.entity.User;
@@ -26,9 +27,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -36,6 +34,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Override
     public String login(String username, String password) {
@@ -48,12 +49,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String register(User user) {
+        IdWorker idWorker = new IdWorker(1L);
+
         String username = user.getUsername();
         if (userRepository.findUserByUsername(username) != null) {
             return "用户已存在";
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String rawPassword = user.getPassword();
+        user.setId(idWorker.nextId());
         user.setPassword(encoder.encode(rawPassword));
         List<String> roles = new ArrayList<>();
         roles.add("ROLE_USER");
@@ -69,6 +73,11 @@ public class UserServiceImpl implements UserService {
             return jwtTokenUtil.refreshToken(token);
         }
         return "error";
+    }
+
+    @Override
+    public List<User> findUsers(User user) {
+        return userRepository.findAll();
     }
 
 }

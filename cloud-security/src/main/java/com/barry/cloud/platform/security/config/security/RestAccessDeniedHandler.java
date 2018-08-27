@@ -21,6 +21,11 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setStatus(403);
         response.sendError(HttpServletResponse.SC_FORBIDDEN, "forbidden");
+
+//        response.setCharacterEncoding("UTF-8");
+//        response.setContentType("application/json");
+//        response.getWriter().println("{\"code\":403,\"message\":\"小弟弟，你没有权限访问呀！\",\"data\":\"\"}");
+//        response.getWriter().flush();
     }
 
 }

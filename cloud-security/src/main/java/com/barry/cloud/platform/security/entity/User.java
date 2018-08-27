@@ -26,10 +26,16 @@ public class User {
     @Column(name = "password", nullable = true)
     private String password;
 
-    @ManyToMany(cascade={CascadeType.REFRESH}, fetch = FetchType.EAGER, targetEntity = Role.class)
-    @JoinTable(name = "spark_user_role",
-            joinColumns = {@JoinColumn(name = "uid", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "rid", referencedColumnName = "id")})
+    //@ManyToMany(cascade={CascadeType.REFRESH}, fetch = FetchType.EAGER, targetEntity = Role.class)
+    //@JoinTable(name = "spark_user_role",
+            //joinColumns = {@JoinColumn(name = "uid", referencedColumnName = "id")},
+            //inverseJoinColumns = {@JoinColumn(name = "rid", referencedColumnName = "id")})
+    /**
+     * @Transient表示该属性并非一个到数据库表的字段的映射,ORM框架将忽略该属性；
+     * 如果一个属性并非数据库表的字段映射，就务必将其标示为@Transient，否则ORM框架默认其注解为@Basic；
+     * 表示该字段在数据库表中没有
+     * */
+    @Transient
     private List<String> roles;
 
 }

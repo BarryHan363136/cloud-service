@@ -2,6 +2,8 @@ package com.barry.cloud.platform.security.service;
 
 import com.barry.cloud.platform.security.entity.User;
 
+import java.util.List;
+
 /**
  * 用户操作接口
  *
@@ -35,5 +37,7 @@ public interface UserService {
      * @return 新密钥
      */
     String refreshToken(String oldToken);
+
+    List<User> findUsers(User user);
 
 }

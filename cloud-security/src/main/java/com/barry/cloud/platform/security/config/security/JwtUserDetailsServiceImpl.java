@@ -3,6 +3,7 @@ package com.barry.cloud.platform.security.config.security;
 import com.barry.cloud.platform.security.dao.RoleRepository;
 import com.barry.cloud.platform.security.dao.UserRepository;
 import com.barry.cloud.platform.security.domain.JwtUser;
+import com.barry.cloud.platform.security.entity.Role;
 import com.barry.cloud.platform.security.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 /**
@@ -34,12 +36,14 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findUserByUsername(username);
-        user.setRoles(roleRepository.findRolesByUid(user.getId()));
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         } else {
+            List<Role> roleList = roleRepository.findRolesByUid(user.getId());
             List<String> roles = new ArrayList<>();
-            user.getRoles().stream().map(e -> roles.add(e.getName()));
+            roleList.stream().map(e -> roles.add(e.getName()));
+            //String roles = roleNames.stream().collect(Collectors.joining(","));
+            //String rolestr = String.join(",", roles);
             Collection<? extends GrantedAuthority> authorities = roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
             return new JwtUser(user.getUsername(), user.getPassword(), authorities);
         }

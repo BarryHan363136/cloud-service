@@ -21,6 +21,12 @@ public class EntryPointUnauthorizedHandler implements AuthenticationEntryPoint {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setStatus(401);
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+
+
+//        response.setCharacterEncoding("UTF-8");
+//        response.setContentType("application/json");
+//        response.getWriter().println("{\"code\":401,\"message\":\"小弟弟，你没有携带 token 或者 token 无效！\",\"data\":\"\"}");
+//        response.getWriter().flush();
     }
 
 }

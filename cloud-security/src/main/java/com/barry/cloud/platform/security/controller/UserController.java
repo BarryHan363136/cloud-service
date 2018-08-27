@@ -2,9 +2,13 @@ package com.barry.cloud.platform.security.controller;
 
 import com.barry.cloud.platform.security.entity.User;
 import com.barry.cloud.platform.security.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -15,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/user", produces = "text/html;charset=UTF-8")
+@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
@@ -31,6 +35,9 @@ public class UserController {
      */
     @PostMapping(value = "/login", params = {"username", "password"})
     public String getToken(String username, String password) throws AuthenticationException {
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)){
+            return "ERRPOR {} 确实必要必要";
+        }
         return userService.login(username, password);
     }
 
@@ -43,6 +50,9 @@ public class UserController {
      */
     @PostMapping(value = "/register")
     public String register(User user) throws AuthenticationException {
+        if (user==null || StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())){
+            return "ERRPOR {} 确实必要必要";
+        }
         return userService.register(user);
     }
 
@@ -56,6 +66,11 @@ public class UserController {
     @GetMapping(value = "/refreshToken")
     public String refreshToken(@RequestHeader String authorization) throws AuthenticationException {
         return userService.refreshToken(authorization);
+    }
+
+    @GetMapping(value = "/list")
+    public List<User> list(HttpServletRequest request) {
+        return userService.findUsers(null);
     }
 
 }
