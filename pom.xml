@@ -158,8 +158,8 @@
         <module>cloud-web</module>
         <module>cloud-common</module>
         <module>cloud-shiro</module>
-        <module>cloud-security-jwt</module>
         <module>cloud-jpa</module>
+        <module>cloud-security</module>
     </modules>
 
 </project>
