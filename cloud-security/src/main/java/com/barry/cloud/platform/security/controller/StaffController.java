@@ -16,6 +16,11 @@ import java.util.List;
 @RequestMapping("/staff")
 public class StaffController {
 
+    /**
+     * 以下两种注解都可以
+     * @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+     * @Secured({"ROLE_ADMIN"})
+     * */
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/list")
     public List list() {
