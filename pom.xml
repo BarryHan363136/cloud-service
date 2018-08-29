@@ -160,6 +160,7 @@
         <module>cloud-shiro</module>
         <module>cloud-jpa</module>
         <module>cloud-security</module>
+        <module>cloud-oauth2</module>
     </modules>
 
 </project>
