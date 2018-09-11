@@ -1,6 +1,6 @@
 package com.barry.cloud.platform.datasource.entity;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
 public class User {
