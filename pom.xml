@@ -27,11 +27,12 @@
         <mapper.version>2.0.3</mapper.version>
         <shiro-redis.version>3.1.0</shiro-redis.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <pagehelper.version>1.2.5</pagehelper.version>
+        <pagehelper.version>1.2.7</pagehelper.version>
         <collections4.version>4.2</collections4.version>
         <persistence.version>1.0.2</persistence.version>
         <ant.version>1.10.5</ant.version>
         <commons-codec.version>1.11</commons-codec.version>
+        <aspectjweaver.version>1.8.13</aspectjweaver.version>
     </properties>
 
     <dependencyManagement>
@@ -156,6 +157,45 @@
             <version>${commons-codec.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>${mapper.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -188,6 +228,8 @@
         <module>cloud-security</module>
         <module>cloud-oauth2</module>
         <module>cloud-quartz</module>
+        <module>cloud-oap</module>
+        <module>cloud-distributed-order-number</module>
     </modules>
 
 </project>

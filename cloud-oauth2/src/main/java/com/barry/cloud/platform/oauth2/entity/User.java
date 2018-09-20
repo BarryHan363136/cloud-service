@@ -17,17 +17,17 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username", unique = true)
-    private String username;
+    @Column(name = "user_name", unique = true)
+    private String userName;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "user_pwd")
+    private String userPwd;
 
-    @Column(name = "salary")
-    private Integer salary;
+    @Column(name = "gender")
+    private Integer gender;
 
-    @Column(name = "age")
-    private Integer age;
+    @Column(name = "status")
+    private Integer status;
 
 
 
