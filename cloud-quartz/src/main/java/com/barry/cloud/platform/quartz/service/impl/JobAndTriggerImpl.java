@@ -1,7 +1,7 @@
 package com.barry.cloud.platform.quartz.service.impl;
 
-import com.barry.cloud.platform.common.parse.json.JSONMapper;
 import com.barry.cloud.platform.quartz.entity.TaskInfo;
+import com.barry.cloud.platform.quartz.job.QuartzNewsJob;
 import com.barry.cloud.platform.quartz.job.QuartzWeatherJob;
 import com.barry.cloud.platform.quartz.service.JobAndTriggerService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,6 @@ import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -38,9 +37,10 @@ public class JobAndTriggerImpl implements JobAndTriggerService {
             scheduler.start();
 
             // 构建job信息
-            JobDetail jobDetail = JobBuilder.newJob(QuartzWeatherJob.class)
+            log.info("===> AddJob dataType():{} "+taskInfo.getDataType()+" ,JobClass:{} "+this.getJobClass(taskInfo.getDataType()));
+            JobDetail jobDetail = JobBuilder.newJob(this.getJobClass(taskInfo.getDataType()))
                     .withIdentity(taskInfo.getJobName(), taskInfo.getJobGroup()).build();
-            jobDetail.getJobDataMap().put("weatherDataMap", taskInfo);
+            jobDetail.getJobDataMap().put("cacheDataMap", taskInfo);
             // 表达式调度构建器(即任务执行的时间)
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(taskInfo.getCronExpression());
 
@@ -135,11 +135,6 @@ public class JobAndTriggerImpl implements JobAndTriggerService {
                     job.setJobName(jobKey.getName());
                     job.setJobGroup(jobKey.getGroup());
                     Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
-//                    Integer jobState = null;
-//                    if (StringUtils.isNotEmpty(triggerState.name())){
-//                        jobState = Integer.parseInt(triggerState.name());
-//                    }
-//                    job.setJobStatus(jobState);
                     job.setRemark("触发器:" + trigger.getKey()+", job状态:"+getJobState(triggerState.name()));
 
                     if (trigger instanceof CronTrigger) {
@@ -154,43 +149,6 @@ public class JobAndTriggerImpl implements JobAndTriggerService {
             log.error("getAllJob error {} ", e);
         }
         return jobList;
-    }
-
-    /**
-     * state的值代表该任务触发器的状态：
-     * STATE_BLOCKED 	4   阻塞
-     * STATE_COMPLETE 	2   完成
-     * STATE_ERROR 	3   错误
-     * STATE_NONE 	-1   不存在
-     * STATE_NORMAL 	0  正常
-     * STATE_PAUSED 	1  暂停
-     * */
-    private String getJobState(String stateName){
-        String status = "";
-        switch(stateName){
-            case "NONE":
-                status = "不存在";
-                break;
-            case "NORMAL":
-                status = "正常";
-                break;
-            case "PAUSED":
-                status = "暂停";
-                break;
-            case "COMPLETE":
-                status = "完成";
-                break;
-            case "ERROR":
-                status = "错误";
-                break;
-            case "BLOCKED":
-                status = "阻塞";
-                break;
-            default:
-                status = "";
-                break;
-        }
-        return status;
     }
 
     /**
@@ -277,6 +235,65 @@ public class JobAndTriggerImpl implements JobAndTriggerService {
         } catch (SchedulerException e) {
             log.error("resumeAll error {} ", e);
         }
+    }
+
+    /**
+     * state的值代表该任务触发器的状态：
+     * STATE_BLOCKED 	4   阻塞
+     * STATE_COMPLETE 	2   完成
+     * STATE_ERROR 	3   错误
+     * STATE_NONE 	-1   不存在
+     * STATE_NORMAL 	0  正常
+     * STATE_PAUSED 	1  暂停
+     * */
+    private String getJobState(String stateName){
+        String status = "";
+        switch(stateName){
+            case "NONE":
+                status = "不存在";
+                break;
+            case "NORMAL":
+                status = "正常";
+                break;
+            case "PAUSED":
+                status = "暂停";
+                break;
+            case "COMPLETE":
+                status = "完成";
+                break;
+            case "ERROR":
+                status = "错误";
+                break;
+            case "BLOCKED":
+                status = "阻塞";
+                break;
+            default:
+                status = "";
+                break;
+        }
+        return status;
+    }
+
+    private Class<? extends Job> getJobClass(String dataType){
+        Class<? extends Job> jobClass = null;
+        switch(dataType.toUpperCase()){
+            case "WEATHER":
+                jobClass = QuartzWeatherJob.class;
+                break;
+            case "NEWS":
+                jobClass = QuartzNewsJob.class;
+                break;
+            case "DIANPING":
+                jobClass = null;
+                break;
+            case "DZHSTOCK":
+                jobClass = null;
+                break;
+            default:
+                jobClass = null;
+                break;
+        }
+        return jobClass;
     }
 
 

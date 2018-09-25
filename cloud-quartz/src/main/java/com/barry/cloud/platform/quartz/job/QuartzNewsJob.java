@@ -14,12 +14,12 @@ import java.io.Serializable;
 @Slf4j
 @PersistJobDataAfterExecution
 @DisallowConcurrentExecution
-public class QuartzWeatherJob implements Job, Serializable {
+public class QuartzNewsJob implements Job, Serializable {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         TaskInfo taskInfo = (TaskInfo) jobExecutionContext.getJobDetail().getJobDataMap().get("jobDataMap");
-        log.info("<============QuartzWeatherJob=================>"+DateUtils.getCurrentDateTimeAsString());
+        log.info("<============QuartzNewsJob=================>"+DateUtils.getCurrentDateTimeAsString());
     }
 
 }

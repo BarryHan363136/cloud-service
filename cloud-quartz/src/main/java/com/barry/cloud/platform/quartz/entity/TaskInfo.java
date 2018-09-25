@@ -17,6 +17,9 @@ public class TaskInfo implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "data_type", nullable = false)
+    private String dataType;
+
     @Column(name = "job_name", nullable = false)
     private String jobName;
 
