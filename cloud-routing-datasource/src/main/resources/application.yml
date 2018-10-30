@@ -1,0 +1,71 @@
+
+server:
+  port: 8096
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.33.128:3306/trymaster?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
+    username: root
+    password: hantongshan
+    readSize: 1
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat,wall
+    initialSize: 5
+    maxActive: 20
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 5
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    useGlobalDataSourceStat: true
+    validationQuery: SELECT 1 FROM DUAL
+  slave:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/tryslave1?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
+    username: root
+    password: hantongshan
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat,wall
+    initialSize: 5
+    maxActive: 20
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 5
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    useGlobalDataSourceStat: true
+    validationQuery: SELECT 1 FROM DUAL
+  messages:
+    encoding: UTF-8
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+mybatis:
+  mapper-locations: com/carlton/demo/mapper/*.xml
+  type-aliases-package: com.barry.cloud.platform.routing.entity
+logging:
+  level:
+    com.carlton.demo.mapper: debug
+
+druid:
+  init:
+    prefix: /druid/*
+    allow:
+    deny: 192.168.1.100
+    loginUsername: root
+    loginPassword: hantongshan
+    resetEnable: false

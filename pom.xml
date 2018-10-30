@@ -230,6 +230,7 @@
         <module>cloud-quartz</module>
         <module>cloud-oap</module>
         <module>cloud-distributed-order-number</module>
+        <module>cloud-routing-datasource</module>
     </modules>
 
 </project>
