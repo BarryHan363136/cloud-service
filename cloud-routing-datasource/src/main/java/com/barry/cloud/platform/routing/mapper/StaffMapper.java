@@ -1,5 +1,7 @@
 package com.barry.cloud.platform.routing.mapper;
 
+import com.barry.cloud.platform.routing.common.base.BaseMapper;
+import com.barry.cloud.platform.routing.entity.Staff;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Repository;
  * @Date 2018/10/30 18:02
  */
 @Repository
-public class StaffMapper {
+public interface StaffMapper extends BaseMapper<Staff, Long> {
+
+
 
 }

@@ -16,8 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
  *
  */
 @SpringBootApplication
-@ComponentScan(basePackages={"com.barry.cloud.platform"})
-@MapperScan("com.barry.cloud.platform.web.mapper")
+@MapperScan("com.barry.cloud.platform.routing.mapper")
 @ServletComponentScan
 public class RoutingStarter extends SpringBootServletInitializer {
 
