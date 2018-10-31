@@ -59,7 +59,8 @@ mybatis:
   type-aliases-package: com.barry.cloud.platform.*.entity
 logging:
   level:
-    com.carlton.demo.mapper: debug
+    com.barry.cloud.platform.routing.mapper: info
+    org.springframework: info
 
 druid:
   init:
