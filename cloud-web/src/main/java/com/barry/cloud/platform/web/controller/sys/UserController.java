@@ -77,7 +77,6 @@ public class UserController {
 
     @GetMapping(value = "/del")
     public void logout() {
-
     }
 
 

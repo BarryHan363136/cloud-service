@@ -1,0 +1,27 @@
+
+HI Alexander:
+
+经检测发现服务器Tomcat版本存在CVE漏洞, 针对此问题希望你们能把此BUG的等级调整为LOW, 具体原因如下:
+<1>. 产品依赖：
+         由于我们目前使用的是微软云<Azure>平台, 其内置的Tomcat所有Tomcat版本都含有CVE漏洞, 并且微软云在短期内没办法及时的更新产品, 让我们的应用部署在稳定安全的tomcat版本上
+<2>. 部署环境:
+         我们的应用部署在服务器上需要经过相关流程中的打包、部署等阶段的安全检查及检测, 暂时不能通过格式化服务器的方式解决此BUG
+
+但是我们会针对此问题做出以下相关安全措施来避免CVE漏洞来带来的影响 :
+<1>. 我们会第一时间提一个HIGH Level Ticket给到微软云，让其尽快的更新产品, 支持到稳定安全的tomcat版本
+<2>. 部署的服务器增加IP白名单功能, 在入站规则中增加安全访问的网络, 只运行特定的IP或域名访问我们的服务器环境
+<3>. 在应用服务器的任何返回值的内容中屏蔽掉Tomcat的相关配置信息,避免任何第三方扫描到我们的Tomcat版本,以免进行攻击
+
+
+
+Best regards,
+
+Tongshan Han (韩同杉)
+Backend DEV
+
+A501, No. 701, DongChangzhi Rd, Hong Kou District, Shanghai 200080, PR China
+上海市虹口区东长治路701号A栋501
+E-mail: Tongshan.Han @partner. bmw.com
+Mobile: +86 13564440277
+Web: http://www.bmw.com
+

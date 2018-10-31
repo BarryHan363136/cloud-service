@@ -25,6 +25,9 @@ public class MyAbstractRoutingDataSource extends AbstractRoutingDataSource {
             return DataSourceType.write.getType();
         // 读 简单负载均衡
         int number = count.getAndAdd(1);
+        if (number > 9999){
+            count.set(-1);
+        }
         int lookupKey = number % dataSourceNumber;
         Integer i = lookupKey;
         return i;

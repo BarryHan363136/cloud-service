@@ -15,16 +15,18 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DataSourceAop {
 
-    @Before("execution(* com.barry.cloud.platform.routing.mapper.*.select*(..)) || " +
-            "execution(* com.barry.cloud.platform.routing.mapper.*.count*(..))")
+    @Before("execution(* com.barry.cloud.platform.routing.*.select*(..)) " +
+            "|| execution(* com.barry.cloud.platform.routing.*.get*(..)) " +
+            "|| execution(* com.barry.cloud.platform.routing.*.find*(..))")
     public void setReadDataSourceType() {
         DataSourceContextHolder.read();
         log.info("dataSource切换到：Read");
     }
 
-    @Before("execution(* com.barry.cloud.platform.routing.mapper.*.insert*(..)) || " +
-            "execution(* com.barry.cloud.platform.routing.mapper.*.update*(..)) || " +
-            "execution(* com.barry.cloud.platform.routing.mapper.*.delete*(..))")
+    @Before("execution(* com.barry.cloud.platform.routing.*.insert*(..)) || " +
+            "execution(* com.barry.cloud.platform.routing.*.update*(..)) || " +
+            "execution(* com.barry.cloud.platform.routing.*.delete*(..))" +
+            "execution(* com.barry.cloud.platform.routing.*.save*(..))")
     public void setWriteDataSourceType() {
         DataSourceContextHolder.write();
         log.info("dataSource切换到：write");
