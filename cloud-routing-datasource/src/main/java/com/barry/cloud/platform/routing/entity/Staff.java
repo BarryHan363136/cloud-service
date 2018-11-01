@@ -9,7 +9,7 @@ public class Staff {
 
     private String name;
 
-    private Byte gender;
+    private Short gender;
 
     private String mobile;
 

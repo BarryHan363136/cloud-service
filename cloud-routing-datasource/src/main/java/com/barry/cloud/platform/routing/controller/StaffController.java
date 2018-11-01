@@ -5,9 +5,8 @@ import com.barry.cloud.platform.routing.service.StaffService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -34,6 +33,15 @@ public class StaffController {
         return staff;
     }
 
+    /**
+     * {"id":3,"name":"好人一生平安","gender":0,"mobile":"15963585425","address":"上海市闵行区七莘路","remark":"测试数据3L"}
+     *
+     * */
+    @PostMapping(value = "/save")
+    public Staff save(@RequestBody Staff staff) {
+        staffService.save(staff);
+        return staff;
+    }
 
 
 

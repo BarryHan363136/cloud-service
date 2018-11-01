@@ -15,18 +15,21 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DataSourceAop {
 
-    @Before("execution(* com.barry.cloud.platform.routing.*.select*(..)) " +
-            "|| execution(* com.barry.cloud.platform.routing.*.get*(..)) " +
-            "|| execution(* com.barry.cloud.platform.routing.*.find*(..))")
+    @Before("execution(* com.barry.cloud.platform.routing.service..*.select*(..)) " +
+            "|| execution(* com.barry.cloud.platform.routing.service..*.get*(..)) " +
+            "|| execution(* com.barry.cloud.platform.routing.service..*.find*(..)) " +
+            "|| execution(* com.barry.cloud.platform.routing.service..*.query*(..))")
+
     public void setReadDataSourceType() {
         DataSourceContextHolder.read();
         log.info("dataSource切换到：Read");
     }
 
-    @Before("execution(* com.barry.cloud.platform.routing.*.insert*(..)) || " +
-            "execution(* com.barry.cloud.platform.routing.*.update*(..)) || " +
-            "execution(* com.barry.cloud.platform.routing.*.delete*(..))" +
-            "execution(* com.barry.cloud.platform.routing.*.save*(..))")
+    @Before("execution(* com.barry.cloud.platform.routing.service..*.insert*(..)) || " +
+            "execution(* com.barry.cloud.platform.routing.service..*.update*(..)) || " +
+            "execution(* com.barry.cloud.platform.routing.service..*.delete*(..)) || " +
+            "execution(* com.barry.cloud.platform.routing.service..*.save*(..)) || " +
+            "execution(* com.barry.cloud.platform.routing.service..*.modify*(..))")
     public void setWriteDataSourceType() {
         DataSourceContextHolder.write();
         log.info("dataSource切换到：write");

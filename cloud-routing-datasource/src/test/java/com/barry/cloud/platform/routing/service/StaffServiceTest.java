@@ -25,6 +25,17 @@ public class StaffServiceTest extends BaseTest {
         log.info("============>"+JSONMapper.writeObjectAsString(staff));
     }
 
+    @Test
+    public void model(){
+        Staff staff = new Staff();
+        staff.setId(3L);
+        staff.setName("好人一生平安");
+        staff.setGender((short) 0);
+        staff.setMobile("15963585425");
+        staff.setAddress("上海市闵行区七莘路");
+        staff.setRemark("测试数据3L");
+        log.info("============>"+JSONMapper.writeObjectAsString(staff));
+    }
 
 
 

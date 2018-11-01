@@ -42,8 +42,8 @@ public class DataSourceConfiguration {
 
     @Bean
     public ServletRegistrationBean servletRegistrationBean() {
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
-        servletRegistrationBean.addUrlMappings("/druid/*");
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), prefix);
+        servletRegistrationBean.addUrlMappings(prefix);
 
         /** IP白名单 */
         servletRegistrationBean.addInitParameter("allow", allow);
