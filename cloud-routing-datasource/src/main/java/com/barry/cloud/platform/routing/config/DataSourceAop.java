@@ -21,8 +21,8 @@ public class DataSourceAop {
             "|| execution(* com.barry.cloud.platform.routing.service..*.query*(..))")
 
     public void setReadDataSourceType() {
-        DataSourceContextHolder.read();
         log.info("dataSource切换到：Read");
+        DataSourceContextHolder.read();
     }
 
     @Before("execution(* com.barry.cloud.platform.routing.service..*.insert*(..)) || " +
@@ -31,7 +31,7 @@ public class DataSourceAop {
             "execution(* com.barry.cloud.platform.routing.service..*.save*(..)) || " +
             "execution(* com.barry.cloud.platform.routing.service..*.modify*(..))")
     public void setWriteDataSourceType() {
-        DataSourceContextHolder.write();
         log.info("dataSource切换到：write");
+        DataSourceContextHolder.write();
     }
 }
