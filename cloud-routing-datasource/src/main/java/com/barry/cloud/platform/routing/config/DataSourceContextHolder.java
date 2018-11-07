@@ -33,6 +33,7 @@ public class DataSourceContextHolder {
     }
 
     public static String getJdbcType() {
+        log.info("========getJdbcType==========>"+local.get());
         return local.get();
     }
 }
