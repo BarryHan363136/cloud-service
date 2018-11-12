@@ -8,8 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-import sun.plugin2.gluegen.runtime.CPU;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collection;
