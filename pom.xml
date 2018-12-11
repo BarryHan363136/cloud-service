@@ -33,6 +33,7 @@
         <ant.version>1.10.5</ant.version>
         <commons-codec.version>1.11</commons-codec.version>
         <aspectjweaver.version>1.8.13</aspectjweaver.version>
+        <poi.version>4.0.1</poi.version>
     </properties>
 
     <dependencyManagement>
@@ -243,6 +244,18 @@
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectjweaver.version}</version>
         </dependency>
+        
+        <!-- poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -279,6 +292,7 @@
         <module>cloud-oap</module>
         <module>cloud-distributed-order-number</module>
         <module>cloud-routing-datasource</module>
+        <module>cloud-poi</module>
     </modules>
 
 </project>
