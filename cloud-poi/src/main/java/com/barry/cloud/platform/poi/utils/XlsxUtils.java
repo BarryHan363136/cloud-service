@@ -118,14 +118,14 @@ public class XlsxUtils {
     /**
      * 写入excel文件
      * */
-    public static void writeIntoExcel(){
+    public static void writeIntoExcel(String sheetName, String outputPath){
         FileOutputStream out = null;
         try {
             //Create blank workbook
             XSSFWorkbook workbook = new XSSFWorkbook();
 
             //Create a blank sheet
-            XSSFSheet spreadsheet = workbook.createSheet(" Employee Info ");
+            XSSFSheet spreadsheet = workbook.createSheet(sheetName);
 
             //Create row object
             XSSFRow row;
@@ -154,7 +154,7 @@ public class XlsxUtils {
                 }
             }
             /** Write the workbook in file system */
-            out = new FileOutputStream(new File("Writesheet.xlsx"));
+            out = new FileOutputStream(new File(outputPath));
             workbook.write(out);
         } catch (Exception e) {
             e.printStackTrace();
