@@ -3,42 +3,41 @@ package com.barry.cloud.platform.es.entity;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Document(indexName = "spark_data_staff",type = "employee")
-public class Employee {
+public class Employee implements Serializable {
 
     @Id
     private String id;
 
-    @Field
+    //@Field
     private String name;
 
-    @Field
+    //@Field
     private String sex;
 
-    @Field
+    //@Field
     private Integer age;
 
-    @Field
+    //@Field
     private String mobile;
 
-    @Field
+    //@Field
     private String address;
 
-    @Field
+    //@Field
     private String department;
 
-    @Field
+    //@Field
     private String position;
 
-    @Field
+    //@Field
     private Date birthDay;
 
-    @Field
+    //@Field
     private String cardNo;
 
     public Employee(){
