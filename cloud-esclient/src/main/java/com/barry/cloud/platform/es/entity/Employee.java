@@ -6,11 +6,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * , shards=5, replicas=1
- * */
 @Data
-@Document(indexName="spark_data_staff",type="employee")
+@Document(indexName = "spark_data_staff",type = "employee")
 public class Employee implements Serializable {
 
     @Id
@@ -42,5 +39,13 @@ public class Employee implements Serializable {
 
     //@Field
     private String cardNo;
+
+    public Employee(){
+
+    }
+
+    public Employee(String id){
+        this.id = id;
+    }
 
 }

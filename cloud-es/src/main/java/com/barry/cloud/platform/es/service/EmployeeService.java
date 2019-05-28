@@ -19,4 +19,6 @@ public interface EmployeeService {
 
     public void delete(String id);
 
+    List<Employee> findEmployeesByName(String name, Pageable pageable);
+
 }

@@ -1,19 +1,31 @@
 package com.barry.cloud.platform.es.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
+//import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.net.InetAddress;
 
-@Slf4j
+/**
+ * https://github.com/lxwjq/SpringBoot-ElasticSearch
+ * @Configuration用于定义配置类，可替换xml配置文件
+ * # Elasticsearch
+ * # 9200端口是用来让HTTP REST API来访问ElasticSearch，而9300端口是传输层监听的默认端口
+ * elasticsearch.ip=192.168.30.128
+ * elasticsearch.port=9300
+ * elasticsearch.pool=5
+ * elasticsearch.cluster.name=my-application
+ */
 @Configuration
 public class ElasticsearchConfig {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ElasticsearchConfig.class);
 
     /**
      * elk集群地址
@@ -46,7 +58,7 @@ public class ElasticsearchConfig {
      */
     @Bean(name = "transportClient")
     public TransportClient transportClient() {
-        log.info("Elasticsearch初始化开始。。。。。");
+        LOGGER.info("Elasticsearch初始化开始。。。。。");
         TransportClient transportClient = null;
         try {
             // 配置信息
@@ -56,14 +68,13 @@ public class ElasticsearchConfig {
                     .put("thread_pool.search.size", Integer.parseInt(poolSize))//增加线程池个数，暂时设为5
                     .build();
             //配置信息Settings自定义
-            transportClient = new PreBuiltTransportClient(esSetting);
+            //transportClient = new PreBuiltTransportClient(esSetting);
             TransportAddress transportAddress = new TransportAddress(InetAddress.getByName(hostName), Integer.valueOf(port));
             transportClient.addTransportAddresses(transportAddress);
         } catch (Exception e) {
-            log.error("elasticsearch TransportClient create error!!", e);
+            LOGGER.error("elasticsearch TransportClient create error!!", e);
         }
         return transportClient;
     }
-
 
 }

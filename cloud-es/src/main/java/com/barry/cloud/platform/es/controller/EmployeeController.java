@@ -1,7 +1,7 @@
 package com.barry.cloud.platform.es.controller;
 
-import com.barry.cloud.platform.common.id.IdWorker;
 import com.barry.cloud.platform.es.entity.Employee;
+import com.barry.cloud.platform.es.id.IdWorker;
 import com.barry.cloud.platform.es.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
