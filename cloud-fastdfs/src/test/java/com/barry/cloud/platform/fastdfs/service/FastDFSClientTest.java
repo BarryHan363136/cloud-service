@@ -6,7 +6,7 @@ import com.barry.cloud.platform.fastdfs.config.FastDFSClient;
 import com.barry.cloud.platform.fastdfs.entity.FastDFSFile;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.csource.fastdfs.FileInfo;
+import org.csource.fastdfs.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.io.File;
@@ -64,10 +64,28 @@ public class FastDFSClientTest extends BaseFastDFSTest {
     @Test
     public void testGetFile(){
         String groupName = "group1";
-        String remoteFileName = "M00/00/00/wKghnlzuVk-AVAjoAAAAMHsxggo76.jfif";
+        String remoteFileName = "group1/M00/00/00/wKghnlzuJ8KAAN6JAAOwisOcyZc774.jpg";
         FileInfo file = fastDFSClient.getFile(groupName, remoteFileName);
         if (file!=null){
             log.info("==================>"+JSON.toJSONString(file));
+        }
+    }
+
+    @Test
+    public void testGetFileInfo(){
+        try {
+            ClientGlobal.init("C:/Users/qxv0963/Desktop/TempFiles/FDFS/fdfs_client.conf");
+            TrackerClient tracker = new TrackerClient();
+            TrackerServer trackerServer = tracker.getConnection();
+            StorageServer storageServer = null;
+            StorageClient storageClient = new StorageClient(trackerServer, storageServer);
+            FileInfo fi = storageClient.get_file_info("group1", "M00/00/00/wKghnlzuJ8KAAN6JAAOwisOcyZc774.jpg");
+            log.info(fi.getSourceIpAddr());
+            log.info(fi.getFileSize()+"");
+            log.info(fi.getCreateTimestamp()+"");
+            log.info(fi.getCrc32()+"");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
