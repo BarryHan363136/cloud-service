@@ -10,14 +10,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import com.alibaba.fastjson.JSON;
+import com.barry.cloud.platform.fastdfs.entity.FastDFSFile;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.csource.common.MyException;
 import org.csource.common.NameValuePair;
-import org.csource.fastdfs.ClientGlobal;
-import org.csource.fastdfs.StorageClient;
-import org.csource.fastdfs.StorageServer;
-import org.csource.fastdfs.TrackerClient;
-import org.csource.fastdfs.TrackerServer;
+import org.csource.fastdfs.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +38,7 @@ public class FastDFSClient implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info(">>>>>>>>>>>>>>>服务启动执行，执行加载数据等操作<<<<<<<<<<<<<");
+        //String filePath = new ClassPathResource("fdfs_client.conf").getFile().getAbsolutePath();
         ClientGlobal.init(this.getClass().getClassLoader().getResource(CONFIG_FILENAME).getPath());
         trackerClient = new TrackerClient(ClientGlobal.g_tracker_group);
         trackerServer = trackerClient.getConnection();
@@ -163,6 +162,47 @@ public class FastDFSClient implements CommandLineRunner {
             }
         }
         return -1;
+    }
+
+    /**
+     * 根据groupName和文件名获取文件信息
+     * */
+    public FileInfo getFile(String groupName, String remoteFileName) {
+        try {
+            return storageClient.get_file_info(groupName, remoteFileName);
+        } catch (IOException e) {
+            log.error("IO Exception: Get File from Fast DFS failed", e);
+        } catch (Exception e) {
+            log.error("Non IO Exception: Get File from Fast DFS failed", e);
+        }
+        return null;
+    }
+
+    public String[] upload(FastDFSFile file) {
+        log.info("File Name: " + file.getName() + "File Length:" + file.getContent().length);
+
+        NameValuePair[] meta_list = new NameValuePair[1];
+        meta_list[0] = new NameValuePair("author", file.getAuthor());
+
+        long startTime = System.currentTimeMillis();
+        String[] uploadResults = null;
+        try {
+            uploadResults = storageClient.upload_file(file.getContent(), file.getExt(), meta_list);
+        } catch (IOException e) {
+            log.error("IO Exception when uploadind the file:" + file.getName(), e);
+        } catch (Exception e) {
+            log.error("Non IO Exception when uploadind the file:" + file.getName(), e);
+        }
+        log.info("upload_file time used:" + (System.currentTimeMillis() - startTime) + " ms");
+
+        if (uploadResults == null) {
+            log.error("upload file fail, error code:" + storageClient.getErrorCode());
+        }
+        String groupName = uploadResults[0];
+        String remoteFileName = uploadResults[1];
+
+        log.info("upload file successfully!!!" + "group_name:" + groupName + ", remoteFileName:" + " " + remoteFileName);
+        return uploadResults;
     }
 
 //    public static void main(String[] args) throws Exception {
