@@ -34,7 +34,7 @@
         <commons-codec.version>1.11</commons-codec.version>
         <aspectjweaver.version>1.9.2</aspectjweaver.version>
         <poi.version>4.0.1</poi.version>
-        <fastdfs.version>1.27-RELEASE</fastdfs.version>
+        <fastjson.json>1.2.49</fastjson.json>
     </properties>
 
     <dependencyManagement>
