@@ -1,11 +1,6 @@
 package com.barry.cloud.platform.fastdfs.config;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -165,11 +160,48 @@ public class FastDFSClient implements CommandLineRunner {
     }
 
     /**
+     * 根据byte数组，生成文件
+     */
+    public void getFile(byte[] bfile, String filePath,String fileName) {
+        BufferedOutputStream bos = null;
+        FileOutputStream fos = null;
+        File file = null;
+        try {
+            File dir = new File(filePath);
+            if(!dir.exists()&&dir.isDirectory()){
+                dir.mkdirs();
+            }
+            file = new File(filePath+"\\"+fileName);
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(bfile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
      * 根据groupName和文件名获取文件信息
      * */
     public FileInfo getFile(String groupName, String remoteFileName) {
         try {
-            return storageClient.get_file_info(groupName, remoteFileName);
+            FileInfo fileInfo = storageClient.get_file_info(groupName, remoteFileName);
+            return fileInfo;
         } catch (IOException e) {
             log.error("IO Exception: Get File from Fast DFS failed", e);
         } catch (Exception e) {

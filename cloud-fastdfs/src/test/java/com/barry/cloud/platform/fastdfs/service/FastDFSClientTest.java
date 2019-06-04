@@ -72,23 +72,15 @@ public class FastDFSClientTest extends BaseFastDFSTest {
     }
 
     @Test
-    public void testGetFileInfo(){
-        try {
-            ClientGlobal.init("C:/Users/qxv0963/Desktop/TempFiles/FDFS/fdfs_client.conf");
-            TrackerClient tracker = new TrackerClient();
-            TrackerServer trackerServer = tracker.getConnection();
-            StorageServer storageServer = null;
-            StorageClient storageClient = new StorageClient(trackerServer, storageServer);
-            FileInfo fi = storageClient.get_file_info("group1", "M00/00/00/wKghnlzuJ8KAAN6JAAOwisOcyZc774.jpg");
-            log.info(fi.getSourceIpAddr());
-            log.info(fi.getFileSize()+"");
-            log.info(fi.getCreateTimestamp()+"");
-            log.info(fi.getCrc32()+"");
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void testDownload() {
+        String filePath = "C:/Users/qxv0963/Desktop/TempFiles/FDFS/"+"1000.jpg";
+        File file = new File(filePath);
+        fastDFSClient.downloadFile("group1", "M00/00/00/wKghnlzuJ8KAAN6JAAOwisOcyZc774.jpg" , file);
+        file = new File(filePath);
+        if (file!=null){
+            log.info("==================>"+file.getPath());
         }
     }
-
 
 
 }
