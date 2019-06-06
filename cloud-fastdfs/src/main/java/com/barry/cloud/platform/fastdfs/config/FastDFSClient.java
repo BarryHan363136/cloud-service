@@ -63,21 +63,21 @@ public class FastDFSClient implements CommandLineRunner {
      * 上传文件,返回值为String数组,数组中包含两个值,[0]groupName;[1]文件路径及文件名
      * 返回值示例: ["group1","M00/00/00/wKghnlzuLAGAFHsbAAC3RwX2LxM075.jpg"]
      * @param file 文件对象
-     * @param fileName 文件名
+     * @param fileExtName 文件名
      * @return
      */
-    public String[] uploadFile(File file, String fileName) {
-        return uploadFile(file,fileName,null);
+    public String[] uploadFile(File file, String fileExtName) {
+        return uploadFile(file, fileExtName,null);
     }
 
     /**
      * 上传文件,返回值为String数组,数组中包含两个值,[0]groupName;[1]文件路径及文件名
      * @param file 文件对象
-     * @param fileName 文件名
+     * @param fileExtName 文件扩展名
      * @param metaList 文件元数据
      * @return
      */
-    public  String[] uploadFile(File file, String fileName, Map<String,String> metaList) {
+    public  String[] uploadFile(File file, String fileExtName, Map<String,String> metaList) {
         try {
             byte[] buff = IOUtils.toByteArray(new FileInputStream(file));
             NameValuePair[] nameValuePairs = null;
@@ -91,7 +91,7 @@ public class FastDFSClient implements CommandLineRunner {
                     nameValuePairs[index++] = new NameValuePair(name,value);
                 }
             }
-            return storageClient.upload_file(GROUP_NAME,buff,fileName,nameValuePairs);
+            return storageClient.upload_file(GROUP_NAME,buff,fileExtName,nameValuePairs);
         } catch (Exception e) {
             e.printStackTrace();
         }
