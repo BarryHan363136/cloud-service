@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
+
 import com.alibaba.fastjson.JSON;
 import com.barry.cloud.platform.fastdfs.entity.FastDFSFile;
 import lombok.extern.slf4j.Slf4j;
@@ -137,26 +139,38 @@ public class FastDFSClient implements CommandLineRunner {
      * @param outFile 文件下载保存位置
      * @return
      */
-    public Integer downloadFile(String groupName,String fileId, File outFile) {
-        FileOutputStream fos = null;
+//    public Integer downloadFile(String groupName,String fileId, File outFile) {
+//        FileOutputStream fos = null;
+//        try {
+//            byte[] content = storageClient.download_file(groupName,fileId);
+//            fos = new FileOutputStream(outFile);
+//            InputStream ips = new ByteArrayInputStream(content);
+//            IOUtils.copy(ips,fos);
+//            return 0;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (fos != null) {
+//                try {
+//                    fos.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//        return -1;
+//    }
+
+    public void downloadFile(String groupName,String remoteFilename, String filePath) {
         try {
-            byte[] content = storageClient.download_file(groupName,fileId);
-            fos = new FileOutputStream(outFile);
-            InputStream ips = new ByteArrayInputStream(content);
-            IOUtils.copy(ips,fos);
-            return 0;
-        } catch (Exception e) {
+            byte[] b = storageClient.download_file(groupName, remoteFilename);
+            IOUtils.write(b, new FileOutputStream(filePath));
+        } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        } catch (MyException e) {
+            e.printStackTrace();
         }
-        return -1;
+
     }
 
     /**

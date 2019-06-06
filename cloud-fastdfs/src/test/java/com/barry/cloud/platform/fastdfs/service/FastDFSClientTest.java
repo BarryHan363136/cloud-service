@@ -37,34 +37,10 @@ public class FastDFSClientTest extends BaseFastDFSTest {
         log.info("============>"+JSON.toJSONString(result));
     }
 
-    /**
-     * ["group1","M00/00/00/wKghnlzuVk-AVAjoAAAAMHsxggo76.jfif"]
-     * */
-    @Test
-    public void testUploadFile2() throws IOException {
-        File file = new File("C:/Users/qxv0963/Desktop/TempFiles/FDFS/003.jfif");
-        String fileName = "003.jfif";
-
-        byte[] fileBuff = null;
-        InputStream inputStream = IOUtils.toInputStream("C:/Users/qxv0963/Desktop/TempFiles/FDFS/003.jfif", "UTF-8");
-        if(inputStream!=null){
-            int len1 = inputStream.available();
-            fileBuff = new byte[len1];
-            inputStream.read(fileBuff);
-        }
-        inputStream.close();
-        FastDFSFile fastDFSFile = new FastDFSFile(fileName, fileBuff, "jfif");
-        String[] result = fastDFSClient.upload(fastDFSFile);
-        log.info("============>"+result.length);
-        log.info("============>"+result[0]);
-        log.info("============>"+result[1]);
-        log.info("============>"+JSON.toJSONString(result));
-    }
-
     @Test
     public void testGetFile(){
         String groupName = "group1";
-        String remoteFileName = "group1/M00/00/00/wKghnlzuJ8KAAN6JAAOwisOcyZc774.jpg";
+        String remoteFileName = "M00/00/00/wKghoVz4pJGAa7WYAAOwisOcyZc640_big.jpg";
         FileInfo file = fastDFSClient.getFile(groupName, remoteFileName);
         if (file!=null){
             log.info("==================>"+JSON.toJSONString(file));
@@ -73,10 +49,10 @@ public class FastDFSClientTest extends BaseFastDFSTest {
 
     @Test
     public void testDownload() {
-        String filePath = "C:/Users/qxv0963/Desktop/TempFiles/FDFS/"+"1000.jpg";
-        File file = new File(filePath);
-        fastDFSClient.downloadFile("group1", "M00/00/00/wKghnlzuJ8KAAN6JAAOwisOcyZc774.jpg" , file);
-        file = new File(filePath);
+        String filePath = "C:/Users/qxv0963/Desktop/TempFiles/DFS/1000.jpg";
+        fastDFSClient.downloadFile("group1", "M00/00/00/wKghoVz4pJGAa7WYAAOwisOcyZc640.jpg" , filePath);
+        String path = filePath;
+        File file = new File(path);
         if (file!=null){
             log.info("==================>"+file.getPath());
         }
