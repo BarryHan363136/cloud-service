@@ -84,14 +84,13 @@ public class FileExcelUtils {
 
             @Override
             public void invoke(List<String> users, AnalysisContext context) {
-                //log.info("===================>"+users);
                 log.info("========111===========>name:"+ users.get(0)+",password:"+users.get(1)+",age:"+users.get(2)+",birthTime:"+users.get(3));
                 UserReader user = new UserReader();
-                user.setName(users.get(0).toString());
-                user.setPassword(users.get(1).toString());
-                user.setAge(users.get(2)!=null ? Integer.parseInt(users.get(2).toString()) : null);
+                user.setName(users.get(0));
+                user.setPassword(users.get(1));
+                user.setAge(users.get(2)!=null ? Integer.parseInt(users.get(2)) : null);
                 try {
-                    user.setBirthTime(format.parse(users.get(3).toString()));
+                    user.setBirthTime(format.parse(users.get(3)));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
