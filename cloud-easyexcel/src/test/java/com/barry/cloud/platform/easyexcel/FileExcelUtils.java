@@ -6,19 +6,16 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
-import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSON;
 import com.barry.cloud.platform.easyexcel.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import sun.jvm.hotspot.memory.SharedHeap;
-
 import java.io.*;
 import java.util.*;
 
 /**
  * 参考URL: https://blog.csdn.net/tanhongwei1994/article/details/89084125
- *
+ *          https://blog.csdn.net/qq_41066066/article/details/88393053
  * */
 
 @Slf4j
