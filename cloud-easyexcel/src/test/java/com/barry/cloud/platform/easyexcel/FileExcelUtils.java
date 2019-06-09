@@ -8,9 +8,13 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.fastjson.JSON;
 import com.barry.cloud.platform.easyexcel.entity.User;
+import com.barry.cloud.platform.easyexcel.entity.UserReader;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import java.io.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -24,17 +28,21 @@ public class FileExcelUtils {
     @Test
     public void testWriteExcel(){
         List<User> userList = new ArrayList<>();
-//        for (int i=0;i<100;i++){
-//            User user = User.builder().name("张三"+ i).password("1234").age(i).build();
-//            userList.add(user);
-//        }
+        for (int i=0;i<100;i++){
+            User user = new User();
+            user.setName("张三"+i);
+            user.setPassword("hantongshan_"+i);
+            user.setAge(i);
+            user.setBirthTime(new Date());
+            userList.add(user);
+        }
         //文件输出位置
         OutputStream outputStream = null;
         try {
             outputStream = new FileOutputStream("/Users/hts/Desktop/date_test/excel/write001.xlsx");
             ExcelWriter excelWriter = EasyExcelFactory.getWriter(outputStream);
             Sheet sheet1 = new Sheet(1, 0, User.class);
-            sheet1.setSheetName("第一个sheet");
+            sheet1.setSheetName("sheet1");
             // 写数据到 Writer 上下文中
             // 入参1: 数据库查询的数据list集合
             // 入参2: 要写入的目标 sheet
@@ -67,13 +75,27 @@ public class FileExcelUtils {
 
     @Test
     public void read() throws FileNotFoundException {
+        List<UserReader> list = new ArrayList<>();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         File file = new File("/Users/hts/Desktop/date_test/excel/write001.xlsx");
         InputStream inputStream = new FileInputStream(file);
-        AnalysisEventListener<User> listener = new AnalysisEventListener<User>() {
+        AnalysisEventListener<List<String>> listener = new AnalysisEventListener<List<String>>() {
 
             @Override
-            public void invoke(User user, AnalysisContext context) {
-                log.info("===============>"+JSON.toJSONString(user));
+            public void invoke(List<String> users, AnalysisContext context) {
+                //log.info("===================>"+users);
+                log.info("========111===========>name:"+ users.get(0)+",password:"+users.get(1)+",age:"+users.get(2)+",birthTime:"+users.get(3));
+                UserReader user = new UserReader();
+                user.setName(users.get(0).toString());
+                user.setPassword(users.get(1).toString());
+                user.setAge(users.get(2)!=null ? Integer.parseInt(users.get(2).toString()) : null);
+                try {
+                    user.setBirthTime(format.parse(users.get(3).toString()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                list.add(user);
             }
 
             @Override
@@ -84,9 +106,12 @@ public class FileExcelUtils {
         ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
         // ExcelReader excelReader = EasyExcelFactory.getReader(inputStream, listener);
         // 第二个参数为表头行数，按照实际设置
-        excelReader.read(new Sheet(1, 1, User.class));
+        excelReader.read(new Sheet(1, 1));
         // 解析每行结果在listener中处理
+        log.info("=====111==============>"+JSON.toJSONString(list));
     }
+
+
 
 
 }

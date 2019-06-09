@@ -28,8 +28,8 @@ public class User extends BaseRowModel implements Serializable {
     @ExcelProperty(value = "年龄",index = 2)
     private Integer age;
 
-    @ExcelProperty(index = 2,format = "yyyy-MM-dd HH:mm:ss")
+    //@ExcelProperty(value = "出生日期",index = 2,format = "yyyy-MM-dd HH:mm:ss")
+    @ExcelProperty(value = "出生日期",index = 2)
     private Date birthTime;
-
 
 }
