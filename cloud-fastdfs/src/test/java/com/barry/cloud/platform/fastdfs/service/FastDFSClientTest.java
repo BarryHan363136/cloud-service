@@ -33,55 +33,17 @@ public class FastDFSClientTest extends BaseFastDFSTest {
      * */
     @Test
     public void testUploadFile(){
-        File file = new File("C:/Users/qxv0963/Desktop/TempFiles/DFS/003.jpg");
+        File file = new File("C:/Users/qxv0963/Desktop/TempFiles/DFS/005.jpg");
         String[] result = fastDFSClient.uploadFile(file, "jpg");
         log.info("============>"+result.length);
         log.info("============>"+result[0]);
         log.info("============>"+result[1]);
         log.info("============>"+JSON.toJSONString(result));
-        if (result!=null && result.length==2){
-            FileInfo fileInfo = fastDFSClient.getFile(result[0], result[1]);
-            if (file!=null){
-                log.info("==================>"+JSON.toJSONString(file));
-                System.out.println("CRC32签名：" + fileInfo.getCrc32());
-                System.out.println("文件大小：" + fileInfo.getFileSize());
-                System.out.println("服务器地址：" + fileInfo.getSourceIpAddr());
-                System.out.println("创建时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(fileInfo.getCreateTimestamp()));
-            }
-
-        }
     }
 
-    @Test
-    public void testGetFile() {
-        String groupName = "group1";
-        String remoteFileName = "M00/00/00/wKghoVz4yziAIMwQAAHSF9r4APQ683.jpg";
-        FileInfo file = fastDFSClient.getFile(groupName, remoteFileName);
-        if (file!=null){
-            log.info("==================>"+JSON.toJSONString(file));
-        }
-    }
-
-//    @Test
-//    public void testGetFile2(){
-//        try {
-//            ClientGlobal.init(this.getClass().getClassLoader().getResource("fastdfs-client.properties").getPath());
-//            TrackerClient tracker = new TrackerClient();
-//            TrackerServer trackerServer = tracker.getConnection();
-//            StorageServer storageServer = null;
-//            StorageClient storageClient = new StorageClient(trackerServer, storageServer);
-//            //FileInfo fileInfo = storageClient.get_file_info("group1", "M00/00/00/wKghoVz4yziAIMwQAAHSF9r4APQ683.jpg");
-//            NameValuePair[] get_metadata = storageClient.get_metadata("group1", "M00/00/00/wKghoVz4yziAIMwQAAHSF9r4APQ683.jpg");
-//            for (NameValuePair nameValuePair: get_metadata) {
-//                log.info("==================>name: " + nameValuePair.getName() + " value: " + nameValuePair.getValue());
-//            }
-//        } catch (IOException e) {
-//            log.error("testGetFile IOException {} ", e);
-//        } catch (MyException e) {
-//            log.error("testGetFile MyException {} ", e);
-//        }
-//    }
-
+    /**
+     * 测试通过
+     * */
     @Test
     public void testDownload() {
         String filePath = "C:/Users/qxv0963/Desktop/TempFiles/DFS/1000.jpg";
@@ -92,6 +54,20 @@ public class FastDFSClientTest extends BaseFastDFSTest {
             log.info("==================>"+file.getPath());
         }
     }
+
+    /**
+     * 获取文件信息,目前测试不通过
+     * */
+    @Test
+    public void testGetFile() {
+        String groupName = "group1";
+        String remoteFileName = "M00/00/00/wKghoVz9vIGATPsTAAdNbu5PdPM767.jpg";
+        FileInfo file = fastDFSClient.getFile(groupName, remoteFileName);
+        if (file!=null){
+            log.info("==================>"+JSON.toJSONString(file));
+        }
+    }
+
 
 
 }

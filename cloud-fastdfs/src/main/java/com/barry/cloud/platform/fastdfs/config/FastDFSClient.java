@@ -133,12 +133,6 @@ public class FastDFSClient implements CommandLineRunner {
         return -1;
     }
 
-    /**
-     * 下载文件
-     * @param fileId 文件ID（上传文件成功后返回的ID）
-     * @param outFile 文件下载保存位置
-     * @return
-     */
 //    public Integer downloadFile(String groupName,String fileId, File outFile) {
 //        FileOutputStream fos = null;
 //        try {

@@ -19,12 +19,25 @@
 
     <dependencies>
 
+        <!--<dependency>-->
+        <!--<groupId>org.csource</groupId>-->
+        <!--<artifactId>fastdfs-client-java</artifactId>-->
+        <!--<version>1.27-SNAPSHOT</version>-->
+        <!--</dependency>-->
+        <!--
+        fastdfs-client-java-1.27-SNAPSHOT.jar Maven仓库不能下载,解决方式:
+        1.进去git地址: https://github.com/happyfish100/fastdfs-client-java
+        2.git clone https://github.com/happyfish100/fastdfs-client-java.git
+        3.cd ./fastdfs-client-java
+        4.mvn clean install
+        5.进入fastdfs-client-java文件夹下的target目录复制fastdfs-client-java-1.27-SNAPSHOT.jar
+          -->
         <dependency>
             <groupId>org.csource</groupId>
             <artifactId>fastdfs-client-java</artifactId>
-            <version>1.27-RELEASE</version>
+            <version>1.27-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/fastdfs-client-java-1.27-RELEASE.jar</systemPath>
+            <systemPath>${project.basedir}/libs/fastdfs-client-java-1.27-SNAPSHOT.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -88,6 +101,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
         </dependency>
 
     </dependencies>

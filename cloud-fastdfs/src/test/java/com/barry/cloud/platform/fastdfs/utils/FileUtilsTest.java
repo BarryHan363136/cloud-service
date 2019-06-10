@@ -1,11 +1,16 @@
 package com.barry.cloud.platform.fastdfs.utils;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.csource.common.IniFileReader;
 import org.csource.common.MyException;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
 import org.junit.Test;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
@@ -36,18 +41,23 @@ public class FileUtilsTest {
     }
 
     @Test
-    public void testGetFile2(){
+    public void testUploadFile2(){
         try {
             ClientGlobal.init(this.getClass().getClassLoader().getResource("fdfs_client.conf").getPath());
             TrackerClient tracker = new TrackerClient();
             TrackerServer trackerServer = tracker.getConnection();
             StorageServer storageServer = null;
             StorageClient storageClient = new StorageClient(trackerServer, storageServer);
-            //FileInfo fileInfo = storageClient.get_file_info("group1", "M00/00/00/wKghoVz4yziAIMwQAAHSF9r4APQ683.jpg");
-            NameValuePair[] get_metadata = storageClient.get_metadata("group1", "M00/00/00/wKghoVz4yziAIMwQAAHSF9r4APQ683.jpg");
-            for (NameValuePair nameValuePair: get_metadata) {
-                log.info("==================>name: " + nameValuePair.getName() + " value: " + nameValuePair.getValue());
-            }
+            NameValuePair[] meta_list = new NameValuePair[4];
+            meta_list[0] = new NameValuePair("width", "800");
+            meta_list[1] = new NameValuePair("heigth", "600");
+            meta_list[2] = new NameValuePair("bgcolor", "#FFFFFF");
+            meta_list[3] = new NameValuePair("author", "Mike");
+
+            File file = new File("C:/Users/qxv0963/Desktop/TempFiles/DFS/006.jpg");
+            byte[] file_buff = IOUtils.toByteArray(new FileInputStream(file));
+            String[] results = storageClient.upload_file(file_buff, "jpg", meta_list);
+            log.info("===================>"+JSON.toJSONString(results));
         } catch (IOException e) {
             log.error("testGetFile IOException {} ", e);
         } catch (MyException e) {
@@ -55,17 +65,24 @@ public class FileUtilsTest {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
+    @Test
+    public void testGetFile2() {
+        try {
+            ClientGlobal.init(this.getClass().getClassLoader().getResource("fdfs_client.conf").getPath());
+            TrackerClient tracker = new TrackerClient();
+            TrackerServer trackerServer = tracker.getConnection();
+            StorageServer storageServer = null;
+            StorageClient storageClient = new StorageClient(trackerServer, storageServer);
+            FileInfo fileInfo = storageClient.get_file_info("group1","M00/00/00/wKghoVz97F-AZhfNAACmJ5BCDew773.jpg");
+            if (fileInfo!=null){
+                log.info("===================>" + JSON.toJSONString(fileInfo));
+            }
+        } catch (IOException e) {
+            log.error("testGetFile IOException {} ", e);
+        } catch (MyException e) {
+            log.error("testGetFile MyException {} ", e);
+        }
+    }
 
 
 }
