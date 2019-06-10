@@ -25,7 +25,9 @@
         <!--<version>1.27-SNAPSHOT</version>-->
         <!--</dependency>-->
         <!--
-        fastdfs-client-java-1.27-SNAPSHOT.jar Maven仓库不能下载,解决方式:
+        fastdfs-client-java-1.27-SNAPSHOT.jar Maven仓库不能下载,
+        但是maven仓库可以找到1.27-RELEASE版本,使用此版本是个错误版本会导致get_file_info等API接口报错,需要手工安装1.27-SNAPSHOT版本，
+        解决方式:
         1.进去git地址: https://github.com/happyfish100/fastdfs-client-java
         2.git clone https://github.com/happyfish100/fastdfs-client-java.git
         3.cd ./fastdfs-client-java
