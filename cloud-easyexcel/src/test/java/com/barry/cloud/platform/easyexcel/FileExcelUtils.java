@@ -84,7 +84,7 @@ public class FileExcelUtils {
 
             @Override
             public void invoke(List<String> users, AnalysisContext context) {
-                log.info("========111===========>name:"+ users.get(0)+",password:"+users.get(1)+",age:"+users.get(2)+",birthTime:"+users.get(3));
+                log.info("========111===========>name:[{}], password:[{}], age:[{}], birthTime:[{}]", users.get(0), users.get(1), users.get(2), users.get(3));
                 UserReader user = new UserReader();
                 user.setName(users.get(0));
                 user.setPassword(users.get(1));
