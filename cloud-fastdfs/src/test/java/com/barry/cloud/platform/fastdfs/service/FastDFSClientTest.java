@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 /**
  * @description: FastDFSClient Function Testing
@@ -34,7 +35,7 @@ public class FastDFSClientTest extends BaseFastDFSTest {
     @Test
     public void testUploadFile(){
         File file = new File("C:/Users/qxv0963/Desktop/TempFiles/DFS/005.jpg");
-        String[] result = fastDFSClient.uploadFile(file, "jpg");
+        String[] result = fastDFSClient.uploadFile("group1", file, "jpg");
         log.info("============>"+result.length);
         log.info("============>"+result[0]);
         log.info("============>"+result[1]);
@@ -57,14 +58,29 @@ public class FastDFSClientTest extends BaseFastDFSTest {
 
     /**
      * 获取文件信息,目前测试不通过
+     * {"crc32":-296782605,"createTimestamp":1560132737000,"fileSize":478574,"sourceIpAddr":"192.168.33.161"}
      * */
     @Test
-    public void testGetFile() {
+    public void testGetFileInfo() {
         String groupName = "group1";
         String remoteFileName = "M00/00/00/wKghoVz9vIGATPsTAAdNbu5PdPM767.jpg";
-        FileInfo file = fastDFSClient.getFile(groupName, remoteFileName);
+        FileInfo file = fastDFSClient.getFileInfo(groupName, remoteFileName);
         if (file!=null){
             log.info("==================>"+JSON.toJSONString(file));
+        }
+    }
+
+    /**
+     * 返回值示例:
+     * {"bgcolor":"#FFFFFF","author":"Mike","heigth":"600","width":"800"}
+     * */
+    @Test
+    public void testGetFileMetadata() {
+        String groupName = "group1";
+        String remoteFileName = "M00/00/00/wKghoVz97F-AZhfNAACmJ5BCDew773.jpg";
+        Map<String,String> map = fastDFSClient.getFileMetadata(groupName, remoteFileName);
+        if (map!=null){
+            log.info("==================>"+JSON.toJSONString(map));
         }
     }
 

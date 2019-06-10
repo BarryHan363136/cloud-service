@@ -4,10 +4,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.UUID;
-
-import com.alibaba.fastjson.JSON;
-import com.barry.cloud.platform.fastdfs.entity.FastDFSFile;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.csource.common.MyException;
@@ -20,13 +16,19 @@ import org.springframework.stereotype.Component;
  * @description: FastDFS文件上传下载工具类
  * @author: Tongshan.Han
  * @time: 2019/5/29 10:39
+ * 参考:
+ * https://github.com/happyfish100/fastdfs-client-java
+ * https://gary0416.iteye.com/blog/1148790
+ * https://www.cnblogs.com/eer123/p/9218758.html
+ * https://blog.csdn.net/acmman/article/details/80959338
+ * https://blog.csdn.net/liweizhong193516/article/details/53244134/
+ * http://www.makaidong.com/%E5%8D%9A%E5%AE%A2%E5%9B%AD%E7%83%AD/27295.shtml
  */
 @Component
 @Slf4j
 public class FastDFSClient implements CommandLineRunner {
 
     private static final String CONFIG_FILENAME = "fdfs_client.conf";
-    private static final String GROUP_NAME = "group1";
     private TrackerClient trackerClient = null;
     private TrackerServer trackerServer = null;
     private StorageServer storageServer = null;
@@ -43,22 +45,6 @@ public class FastDFSClient implements CommandLineRunner {
         storageClient = new StorageClient(trackerServer, storageServer);
     }
 
-//    static{
-//        try {
-//            ClientGlobal.init("C:/Users/qxv0963/Desktop/TempFiles/FDFS/fdfs_client.conf");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public FastDFSClient() throws Exception {
-//        trackerClient = new TrackerClient(ClientGlobal.g_tracker_group);
-//        trackerServer = trackerClient.getConnection();
-//        storageServer = trackerClient.getStoreStorage(trackerServer);;
-//        storageClient = new StorageClient(trackerServer, storageServer);
-//    }
-
     /**
      * 上传文件,返回值为String数组,数组中包含两个值,[0]groupName;[1]文件路径及文件名
      * 返回值示例: ["group1","M00/00/00/wKghnlzuLAGAFHsbAAC3RwX2LxM075.jpg"]
@@ -66,8 +52,8 @@ public class FastDFSClient implements CommandLineRunner {
      * @param fileExtName 文件名
      * @return
      */
-    public String[] uploadFile(File file, String fileExtName) {
-        return uploadFile(file, fileExtName,null);
+    public String[] uploadFile(String groupName, File file, String fileExtName) {
+        return uploadFile(groupName, file, fileExtName,null);
     }
 
     /**
@@ -77,7 +63,7 @@ public class FastDFSClient implements CommandLineRunner {
      * @param metaList 文件元数据
      * @return
      */
-    public  String[] uploadFile(File file, String fileExtName, Map<String,String> metaList) {
+    public  String[] uploadFile(String groupName, File file, String fileExtName, Map<String,String> metaList) {
         try {
             byte[] buff = IOUtils.toByteArray(new FileInputStream(file));
             NameValuePair[] nameValuePairs = null;
@@ -91,7 +77,7 @@ public class FastDFSClient implements CommandLineRunner {
                     nameValuePairs[index++] = new NameValuePair(name,value);
                 }
             }
-            return storageClient.upload_file(GROUP_NAME,buff,fileExtName,nameValuePairs);
+            return storageClient.upload_file(groupName,buff,fileExtName,nameValuePairs);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,12 +86,12 @@ public class FastDFSClient implements CommandLineRunner {
 
     /**
      * 获取文件元数据
-     * @param fileId 文件ID
+     * @param remoteFileName 文件ID
      * @return
      */
-    public Map<String,String> getFileMetadata(String groupName,String fileId) {
+    public Map<String,String> getFileMetadata(String groupName,String remoteFileName) {
         try {
-            NameValuePair[] metaList = storageClient.get_metadata(groupName, fileId);
+            NameValuePair[] metaList = storageClient.get_metadata(groupName, remoteFileName);
             if (metaList != null) {
                 HashMap<String,String> map = new HashMap<String, String>();
                 for (NameValuePair metaItem : metaList) {
@@ -132,28 +118,6 @@ public class FastDFSClient implements CommandLineRunner {
         }
         return -1;
     }
-
-//    public Integer downloadFile(String groupName,String fileId, File outFile) {
-//        FileOutputStream fos = null;
-//        try {
-//            byte[] content = storageClient.download_file(groupName,fileId);
-//            fos = new FileOutputStream(outFile);
-//            InputStream ips = new ByteArrayInputStream(content);
-//            IOUtils.copy(ips,fos);
-//            return 0;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (fos != null) {
-//                try {
-//                    fos.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return -1;
-//    }
 
     public void downloadFile(String groupName,String remoteFilename, String filePath) {
         try {
@@ -206,7 +170,7 @@ public class FastDFSClient implements CommandLineRunner {
     /**
      * 根据groupName和文件名获取文件信息
      * */
-    public FileInfo getFile(String groupName, String remoteFileName) {
+    public FileInfo getFileInfo(String groupName, String remoteFileName) {
         try {
             FileInfo fileInfo = storageClient.get_file_info(groupName, remoteFileName);
             return fileInfo;
@@ -216,33 +180,6 @@ public class FastDFSClient implements CommandLineRunner {
             log.error("Non IO Exception: Get File from Fast DFS failed", e);
         }
         return null;
-    }
-
-    public String[] upload(FastDFSFile file) {
-        log.info("File Name: " + file.getName() + "File Length:" + file.getContent().length);
-
-        NameValuePair[] meta_list = new NameValuePair[1];
-        meta_list[0] = new NameValuePair("author", file.getAuthor());
-
-        long startTime = System.currentTimeMillis();
-        String[] uploadResults = null;
-        try {
-            uploadResults = storageClient.upload_file(file.getContent(), file.getExt(), meta_list);
-        } catch (IOException e) {
-            log.error("IO Exception when uploadind the file:" + file.getName(), e);
-        } catch (Exception e) {
-            log.error("Non IO Exception when uploadind the file:" + file.getName(), e);
-        }
-        log.info("upload_file time used:" + (System.currentTimeMillis() - startTime) + " ms");
-
-        if (uploadResults == null) {
-            log.error("upload file fail, error code:" + storageClient.getErrorCode());
-        }
-        String groupName = uploadResults[0];
-        String remoteFileName = uploadResults[1];
-
-        log.info("upload file successfully!!!" + "group_name:" + groupName + ", remoteFileName:" + " " + remoteFileName);
-        return uploadResults;
     }
 
 //    public static void main(String[] args) throws Exception {
