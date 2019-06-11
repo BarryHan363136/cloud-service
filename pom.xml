@@ -299,6 +299,7 @@
         <module>cloud-esclient</module>
         <module>cloud-fastdfs</module>
         <module>cloud-easyexcel</module>
+        <module>cloud-ceph</module>
     </modules>
 
 </project>
