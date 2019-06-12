@@ -6,7 +6,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
 /**
- * TaskApplication [spring boot] 主方法
+ * https://blog.csdn.net/fangxiaoji/article/details/78826165
+ * https://www.cnblogs.com/kaituorensheng/p/9022591.html
+ * https://blog.csdn.net/cowbin2012/article/details/85290876
+ * https://www.cnblogs.com/sanshengshui/p/9741655.html
  *
  * 启动方式，右键->run/debug->Spring Boot App
  *
