@@ -19,67 +19,67 @@ public final class GpsData {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 id = 1;</code>
+     * <code>int64 id = 1;</code>
      */
     long getId();
 
     /**
-     * <code>optional string terminalId = 2;</code>
+     * <code>string terminalId = 2;</code>
      */
     String getTerminalId();
     /**
-     * <code>optional string terminalId = 2;</code>
+     * <code>string terminalId = 2;</code>
      */
     com.google.protobuf.ByteString
         getTerminalIdBytes();
 
     /**
-     * <code>optional string dataTime = 3;</code>
+     * <code>string dataTime = 3;</code>
      */
     String getDataTime();
     /**
-     * <code>optional string dataTime = 3;</code>
+     * <code>string dataTime = 3;</code>
      */
     com.google.protobuf.ByteString
         getDataTimeBytes();
 
     /**
-     * <code>optional double lon = 4;</code>
+     * <code>double lon = 4;</code>
      */
     double getLon();
 
     /**
-     * <code>optional double lat = 5;</code>
+     * <code>double lat = 5;</code>
      */
     double getLat();
 
     /**
-     * <code>optional float speed = 6;</code>
+     * <code>float speed = 6;</code>
      */
     float getSpeed();
 
     /**
-     * <code>optional int32 altitude = 7;</code>
+     * <code>int32 altitude = 7;</code>
      */
     int getAltitude();
 
     /**
-     * <code>optional int32 locType = 8;</code>
+     * <code>int32 locType = 8;</code>
      */
     int getLocType();
 
     /**
-     * <code>optional int32 gpsStatus = 9;</code>
+     * <code>int32 gpsStatus = 9;</code>
      */
     int getGpsStatus();
 
     /**
-     * <code>optional float direction = 10;</code>
+     * <code>float direction = 10;</code>
      */
     float getDirection();
 
     /**
-     * <code>optional int32 satellite = 11;</code>
+     * <code>int32 satellite = 11;</code>
      */
     int getSatellite();
   }
@@ -90,35 +90,38 @@ public final class GpsData {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:gps_data)
       gps_dataOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use gps_data.newBuilder() to construct.
     private gps_data(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private gps_data() {
-      id_ = 0L;
       terminalId_ = "";
       dataTime_ = "";
-      lon_ = 0D;
-      lat_ = 0D;
-      speed_ = 0F;
-      altitude_ = 0;
-      locType_ = 0;
-      gpsStatus_ = 0;
-      direction_ = 0F;
-      satellite_ = 0;
+    }
+
+    @Override
+    @SuppressWarnings({"unused"})
+    protected Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new gps_data();
     }
 
     @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private gps_data(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -127,12 +130,6 @@ public final class GpsData {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               id_ = input.readInt64();
@@ -190,6 +187,13 @@ public final class GpsData {
               satellite_ = input.readInt32();
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -198,6 +202,7 @@ public final class GpsData {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -206,6 +211,7 @@ public final class GpsData {
       return GpsData.internal_static_gps_data_descriptor;
     }
 
+    @Override
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return GpsData.internal_static_gps_data_fieldAccessorTable
@@ -216,7 +222,7 @@ public final class GpsData {
     public static final int ID_FIELD_NUMBER = 1;
     private long id_;
     /**
-     * <code>optional int64 id = 1;</code>
+     * <code>int64 id = 1;</code>
      */
     public long getId() {
       return id_;
@@ -225,7 +231,7 @@ public final class GpsData {
     public static final int TERMINALID_FIELD_NUMBER = 2;
     private volatile Object terminalId_;
     /**
-     * <code>optional string terminalId = 2;</code>
+     * <code>string terminalId = 2;</code>
      */
     public String getTerminalId() {
       Object ref = terminalId_;
@@ -240,7 +246,7 @@ public final class GpsData {
       }
     }
     /**
-     * <code>optional string terminalId = 2;</code>
+     * <code>string terminalId = 2;</code>
      */
     public com.google.protobuf.ByteString
         getTerminalIdBytes() {
@@ -259,7 +265,7 @@ public final class GpsData {
     public static final int DATATIME_FIELD_NUMBER = 3;
     private volatile Object dataTime_;
     /**
-     * <code>optional string dataTime = 3;</code>
+     * <code>string dataTime = 3;</code>
      */
     public String getDataTime() {
       Object ref = dataTime_;
@@ -274,7 +280,7 @@ public final class GpsData {
       }
     }
     /**
-     * <code>optional string dataTime = 3;</code>
+     * <code>string dataTime = 3;</code>
      */
     public com.google.protobuf.ByteString
         getDataTimeBytes() {
@@ -293,7 +299,7 @@ public final class GpsData {
     public static final int LON_FIELD_NUMBER = 4;
     private double lon_;
     /**
-     * <code>optional double lon = 4;</code>
+     * <code>double lon = 4;</code>
      */
     public double getLon() {
       return lon_;
@@ -302,7 +308,7 @@ public final class GpsData {
     public static final int LAT_FIELD_NUMBER = 5;
     private double lat_;
     /**
-     * <code>optional double lat = 5;</code>
+     * <code>double lat = 5;</code>
      */
     public double getLat() {
       return lat_;
@@ -311,7 +317,7 @@ public final class GpsData {
     public static final int SPEED_FIELD_NUMBER = 6;
     private float speed_;
     /**
-     * <code>optional float speed = 6;</code>
+     * <code>float speed = 6;</code>
      */
     public float getSpeed() {
       return speed_;
@@ -320,7 +326,7 @@ public final class GpsData {
     public static final int ALTITUDE_FIELD_NUMBER = 7;
     private int altitude_;
     /**
-     * <code>optional int32 altitude = 7;</code>
+     * <code>int32 altitude = 7;</code>
      */
     public int getAltitude() {
       return altitude_;
@@ -329,7 +335,7 @@ public final class GpsData {
     public static final int LOCTYPE_FIELD_NUMBER = 8;
     private int locType_;
     /**
-     * <code>optional int32 locType = 8;</code>
+     * <code>int32 locType = 8;</code>
      */
     public int getLocType() {
       return locType_;
@@ -338,7 +344,7 @@ public final class GpsData {
     public static final int GPSSTATUS_FIELD_NUMBER = 9;
     private int gpsStatus_;
     /**
-     * <code>optional int32 gpsStatus = 9;</code>
+     * <code>int32 gpsStatus = 9;</code>
      */
     public int getGpsStatus() {
       return gpsStatus_;
@@ -347,7 +353,7 @@ public final class GpsData {
     public static final int DIRECTION_FIELD_NUMBER = 10;
     private float direction_;
     /**
-     * <code>optional float direction = 10;</code>
+     * <code>float direction = 10;</code>
      */
     public float getDirection() {
       return direction_;
@@ -356,13 +362,14 @@ public final class GpsData {
     public static final int SATELLITE_FIELD_NUMBER = 11;
     private int satellite_;
     /**
-     * <code>optional int32 satellite = 11;</code>
+     * <code>int32 satellite = 11;</code>
      */
     public int getSatellite() {
       return satellite_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -372,6 +379,7 @@ public final class GpsData {
       return true;
     }
 
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (id_ != 0L) {
@@ -407,8 +415,10 @@ public final class GpsData {
       if (satellite_ != 0) {
         output.writeInt32(11, satellite_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -456,11 +466,11 @@ public final class GpsData {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(11, satellite_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @Override
     public boolean equals(final Object obj) {
       if (obj == this) {
@@ -471,38 +481,34 @@ public final class GpsData {
       }
       GpsData.gps_data other = (GpsData.gps_data) obj;
 
-      boolean result = true;
-      result = result && (getId()
-          == other.getId());
-      result = result && getTerminalId()
-          .equals(other.getTerminalId());
-      result = result && getDataTime()
-          .equals(other.getDataTime());
-      result = result && (
-          Double.doubleToLongBits(getLon())
-          == Double.doubleToLongBits(
-              other.getLon()));
-      result = result && (
-          Double.doubleToLongBits(getLat())
-          == Double.doubleToLongBits(
-              other.getLat()));
-      result = result && (
-          Float.floatToIntBits(getSpeed())
-          == Float.floatToIntBits(
-              other.getSpeed()));
-      result = result && (getAltitude()
-          == other.getAltitude());
-      result = result && (getLocType()
-          == other.getLocType());
-      result = result && (getGpsStatus()
-          == other.getGpsStatus());
-      result = result && (
-          Float.floatToIntBits(getDirection())
-          == Float.floatToIntBits(
-              other.getDirection()));
-      result = result && (getSatellite()
-          == other.getSatellite());
-      return result;
+      if (getId()
+          != other.getId()) return false;
+      if (!getTerminalId()
+          .equals(other.getTerminalId())) return false;
+      if (!getDataTime()
+          .equals(other.getDataTime())) return false;
+      if (Double.doubleToLongBits(getLon())
+          != Double.doubleToLongBits(
+              other.getLon())) return false;
+      if (Double.doubleToLongBits(getLat())
+          != Double.doubleToLongBits(
+              other.getLat())) return false;
+      if (Float.floatToIntBits(getSpeed())
+          != Float.floatToIntBits(
+              other.getSpeed())) return false;
+      if (getAltitude()
+          != other.getAltitude()) return false;
+      if (getLocType()
+          != other.getLocType()) return false;
+      if (getGpsStatus()
+          != other.getGpsStatus()) return false;
+      if (Float.floatToIntBits(getDirection())
+          != Float.floatToIntBits(
+              other.getDirection())) return false;
+      if (getSatellite()
+          != other.getSatellite()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @Override
@@ -511,7 +517,7 @@ public final class GpsData {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getId());
@@ -544,6 +550,17 @@ public final class GpsData {
       return hash;
     }
 
+    public static GpsData.gps_data parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static GpsData.gps_data parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static GpsData.gps_data parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -603,6 +620,7 @@ public final class GpsData {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -610,6 +628,7 @@ public final class GpsData {
     public static Builder newBuilder(GpsData.gps_data prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -633,6 +652,7 @@ public final class GpsData {
         return GpsData.internal_static_gps_data_descriptor;
       }
 
+      @Override
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return GpsData.internal_static_gps_data_fieldAccessorTable
@@ -655,6 +675,7 @@ public final class GpsData {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @Override
       public Builder clear() {
         super.clear();
         id_ = 0L;
@@ -682,15 +703,18 @@ public final class GpsData {
         return this;
       }
 
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return GpsData.internal_static_gps_data_descriptor;
       }
 
+      @Override
       public GpsData.gps_data getDefaultInstanceForType() {
         return GpsData.gps_data.getDefaultInstance();
       }
 
+      @Override
       public GpsData.gps_data build() {
         GpsData.gps_data result = buildPartial();
         if (!result.isInitialized()) {
@@ -699,6 +723,7 @@ public final class GpsData {
         return result;
       }
 
+      @Override
       public GpsData.gps_data buildPartial() {
         GpsData.gps_data result = new GpsData.gps_data(this);
         result.id_ = id_;
@@ -716,32 +741,39 @@ public final class GpsData {
         return result;
       }
 
+      @Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof GpsData.gps_data) {
           return mergeFrom((GpsData.gps_data)other);
@@ -788,14 +820,17 @@ public final class GpsData {
         if (other.getSatellite() != 0) {
           setSatellite(other.getSatellite());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -816,13 +851,13 @@ public final class GpsData {
 
       private long id_ ;
       /**
-       * <code>optional int64 id = 1;</code>
+       * <code>int64 id = 1;</code>
        */
       public long getId() {
         return id_;
       }
       /**
-       * <code>optional int64 id = 1;</code>
+       * <code>int64 id = 1;</code>
        */
       public Builder setId(long value) {
 
@@ -831,7 +866,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional int64 id = 1;</code>
+       * <code>int64 id = 1;</code>
        */
       public Builder clearId() {
 
@@ -842,7 +877,7 @@ public final class GpsData {
 
       private Object terminalId_ = "";
       /**
-       * <code>optional string terminalId = 2;</code>
+       * <code>string terminalId = 2;</code>
        */
       public String getTerminalId() {
         Object ref = terminalId_;
@@ -857,7 +892,7 @@ public final class GpsData {
         }
       }
       /**
-       * <code>optional string terminalId = 2;</code>
+       * <code>string terminalId = 2;</code>
        */
       public com.google.protobuf.ByteString
           getTerminalIdBytes() {
@@ -873,7 +908,7 @@ public final class GpsData {
         }
       }
       /**
-       * <code>optional string terminalId = 2;</code>
+       * <code>string terminalId = 2;</code>
        */
       public Builder setTerminalId(
           String value) {
@@ -886,7 +921,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional string terminalId = 2;</code>
+       * <code>string terminalId = 2;</code>
        */
       public Builder clearTerminalId() {
 
@@ -895,7 +930,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional string terminalId = 2;</code>
+       * <code>string terminalId = 2;</code>
        */
       public Builder setTerminalIdBytes(
           com.google.protobuf.ByteString value) {
@@ -911,7 +946,7 @@ public final class GpsData {
 
       private Object dataTime_ = "";
       /**
-       * <code>optional string dataTime = 3;</code>
+       * <code>string dataTime = 3;</code>
        */
       public String getDataTime() {
         Object ref = dataTime_;
@@ -926,7 +961,7 @@ public final class GpsData {
         }
       }
       /**
-       * <code>optional string dataTime = 3;</code>
+       * <code>string dataTime = 3;</code>
        */
       public com.google.protobuf.ByteString
           getDataTimeBytes() {
@@ -942,7 +977,7 @@ public final class GpsData {
         }
       }
       /**
-       * <code>optional string dataTime = 3;</code>
+       * <code>string dataTime = 3;</code>
        */
       public Builder setDataTime(
           String value) {
@@ -955,7 +990,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional string dataTime = 3;</code>
+       * <code>string dataTime = 3;</code>
        */
       public Builder clearDataTime() {
 
@@ -964,7 +999,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional string dataTime = 3;</code>
+       * <code>string dataTime = 3;</code>
        */
       public Builder setDataTimeBytes(
           com.google.protobuf.ByteString value) {
@@ -980,13 +1015,13 @@ public final class GpsData {
 
       private double lon_ ;
       /**
-       * <code>optional double lon = 4;</code>
+       * <code>double lon = 4;</code>
        */
       public double getLon() {
         return lon_;
       }
       /**
-       * <code>optional double lon = 4;</code>
+       * <code>double lon = 4;</code>
        */
       public Builder setLon(double value) {
 
@@ -995,7 +1030,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional double lon = 4;</code>
+       * <code>double lon = 4;</code>
        */
       public Builder clearLon() {
 
@@ -1006,13 +1041,13 @@ public final class GpsData {
 
       private double lat_ ;
       /**
-       * <code>optional double lat = 5;</code>
+       * <code>double lat = 5;</code>
        */
       public double getLat() {
         return lat_;
       }
       /**
-       * <code>optional double lat = 5;</code>
+       * <code>double lat = 5;</code>
        */
       public Builder setLat(double value) {
 
@@ -1021,7 +1056,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional double lat = 5;</code>
+       * <code>double lat = 5;</code>
        */
       public Builder clearLat() {
 
@@ -1032,13 +1067,13 @@ public final class GpsData {
 
       private float speed_ ;
       /**
-       * <code>optional float speed = 6;</code>
+       * <code>float speed = 6;</code>
        */
       public float getSpeed() {
         return speed_;
       }
       /**
-       * <code>optional float speed = 6;</code>
+       * <code>float speed = 6;</code>
        */
       public Builder setSpeed(float value) {
 
@@ -1047,7 +1082,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional float speed = 6;</code>
+       * <code>float speed = 6;</code>
        */
       public Builder clearSpeed() {
 
@@ -1058,13 +1093,13 @@ public final class GpsData {
 
       private int altitude_ ;
       /**
-       * <code>optional int32 altitude = 7;</code>
+       * <code>int32 altitude = 7;</code>
        */
       public int getAltitude() {
         return altitude_;
       }
       /**
-       * <code>optional int32 altitude = 7;</code>
+       * <code>int32 altitude = 7;</code>
        */
       public Builder setAltitude(int value) {
 
@@ -1073,7 +1108,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional int32 altitude = 7;</code>
+       * <code>int32 altitude = 7;</code>
        */
       public Builder clearAltitude() {
 
@@ -1084,13 +1119,13 @@ public final class GpsData {
 
       private int locType_ ;
       /**
-       * <code>optional int32 locType = 8;</code>
+       * <code>int32 locType = 8;</code>
        */
       public int getLocType() {
         return locType_;
       }
       /**
-       * <code>optional int32 locType = 8;</code>
+       * <code>int32 locType = 8;</code>
        */
       public Builder setLocType(int value) {
 
@@ -1099,7 +1134,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional int32 locType = 8;</code>
+       * <code>int32 locType = 8;</code>
        */
       public Builder clearLocType() {
 
@@ -1110,13 +1145,13 @@ public final class GpsData {
 
       private int gpsStatus_ ;
       /**
-       * <code>optional int32 gpsStatus = 9;</code>
+       * <code>int32 gpsStatus = 9;</code>
        */
       public int getGpsStatus() {
         return gpsStatus_;
       }
       /**
-       * <code>optional int32 gpsStatus = 9;</code>
+       * <code>int32 gpsStatus = 9;</code>
        */
       public Builder setGpsStatus(int value) {
 
@@ -1125,7 +1160,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional int32 gpsStatus = 9;</code>
+       * <code>int32 gpsStatus = 9;</code>
        */
       public Builder clearGpsStatus() {
 
@@ -1136,13 +1171,13 @@ public final class GpsData {
 
       private float direction_ ;
       /**
-       * <code>optional float direction = 10;</code>
+       * <code>float direction = 10;</code>
        */
       public float getDirection() {
         return direction_;
       }
       /**
-       * <code>optional float direction = 10;</code>
+       * <code>float direction = 10;</code>
        */
       public Builder setDirection(float value) {
 
@@ -1151,7 +1186,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional float direction = 10;</code>
+       * <code>float direction = 10;</code>
        */
       public Builder clearDirection() {
 
@@ -1162,13 +1197,13 @@ public final class GpsData {
 
       private int satellite_ ;
       /**
-       * <code>optional int32 satellite = 11;</code>
+       * <code>int32 satellite = 11;</code>
        */
       public int getSatellite() {
         return satellite_;
       }
       /**
-       * <code>optional int32 satellite = 11;</code>
+       * <code>int32 satellite = 11;</code>
        */
       public Builder setSatellite(int value) {
 
@@ -1177,7 +1212,7 @@ public final class GpsData {
         return this;
       }
       /**
-       * <code>optional int32 satellite = 11;</code>
+       * <code>int32 satellite = 11;</code>
        */
       public Builder clearSatellite() {
 
@@ -1185,14 +1220,16 @@ public final class GpsData {
         onChanged();
         return this;
       }
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1211,11 +1248,12 @@ public final class GpsData {
 
     private static final com.google.protobuf.Parser<gps_data>
         PARSER = new com.google.protobuf.AbstractParser<gps_data>() {
+      @Override
       public gps_data parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new gps_data(input, extensionRegistry);
+        return new gps_data(input, extensionRegistry);
       }
     };
 
@@ -1228,6 +1266,7 @@ public final class GpsData {
       return PARSER;
     }
 
+    @Override
     public GpsData.gps_data getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1256,18 +1295,10 @@ public final class GpsData {
       "ellite\030\013 \001(\005B2\n\'com.barry.cloud.platform" +
       ".protobuf.modelB\007GpsDatab\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        });
     internal_static_gps_data_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_gps_data_fieldAccessorTable = new
