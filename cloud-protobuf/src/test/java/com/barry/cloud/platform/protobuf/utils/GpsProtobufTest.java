@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
  * @description: protobuf ser testing
  * @author: Tongshan.Han
  * @time: 2019/6/12 16:04
+ * 序列化参考: https://www.cnblogs.com/sanshengshui/p/9741655.html
  */
 @Slf4j
 public class GpsProtobufTest {
