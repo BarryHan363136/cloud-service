@@ -15,4 +15,5 @@ message gps_data {
     int32 gpsStatus = 9;
     float direction = 10;
     int32 satellite = 11;
+    int32 state = 12;
 }
