@@ -18,6 +18,7 @@ import javax.annotation.PreDestroy;
  * @description: NETTY服务端的启动类
  * @author: Tongshan.Han
  * @time: 2019/6/13 16:46
+ * https://www.cnblogs.com/sanshengshui/p/9741655.html
  */
 @Component
 @Slf4j
