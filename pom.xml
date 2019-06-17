@@ -303,7 +303,8 @@
         <module>cloud-easyexcel</module>
         <module>cloud-ceph</module>
         <module>cloud-protobuf</module>
-        <module>cloud-netty</module>
+        <module>cloud-netty-server</module>
+        <module>cloud-netty-client</module>
     </modules>
 
 </project>

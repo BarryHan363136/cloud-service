@@ -8,8 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>cloud-netty</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>cloud-netty-server</artifactId>
+    <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -86,7 +86,7 @@
     </dependencies>
 
     <build>
-        <finalName>cloud-protobuf</finalName>
+        <finalName>cloud-netty-server</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
@@ -123,7 +123,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.0.3.RELEASE</version>
                 <configuration>
-                    <mainClass>com.barry.cloud.platform.netty.NettyStarter</mainClass>
+                    <mainClass>com.barry.cloud.platform.netty.NettyServerStarter</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>

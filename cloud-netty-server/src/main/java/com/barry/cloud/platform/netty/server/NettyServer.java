@@ -49,6 +49,7 @@ public class NettyServer {
     @PostConstruct
     public void init() throws Exception {
         log.info("Setting resource leak detector level to {}",leakDetectorLevel);
+        log.info("==============>"+ResourceLeakDetector.Level.valueOf(leakDetectorLevel.toUpperCase()));
         ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.valueOf(leakDetectorLevel.toUpperCase()));
 
         log.info("Starting Server");

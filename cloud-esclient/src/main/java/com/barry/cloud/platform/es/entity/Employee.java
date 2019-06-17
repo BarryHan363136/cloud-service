@@ -2,12 +2,11 @@ package com.barry.cloud.platform.es.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@Document(indexName = "spark_data_staff",type = "employee")
+//@Document(indexName = "spark_data_staff",type = "employee")
 public class Employee implements Serializable {
 
     @Id

@@ -15,10 +15,10 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @ServletComponentScan
-public class NettyStarter {
+public class NettyClientStarter {
 
     public static void main(String[] args) {
-        SpringApplication.run(NettyStarter.class, args);
+        SpringApplication.run(NettyClientStarter.class, args);
     }
 
 }
