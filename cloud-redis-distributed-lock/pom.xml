@@ -27,7 +27,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>${jedis.version}</version>
+            <!--<version>${jedis.version}</version>-->
         </dependency>
 
         <dependency>
