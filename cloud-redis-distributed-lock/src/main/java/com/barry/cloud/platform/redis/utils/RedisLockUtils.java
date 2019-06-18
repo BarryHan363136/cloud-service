@@ -9,6 +9,7 @@ import java.util.Collections;
  * @time: 2019/6/18 18:07
  */
 public class RedisLockUtils {
+
     private static final String SET_IF_NOT_EXIST = "NX";
     private static final String SET_WITH_EXPIRE_TIME = "PX";
     private static final String LOCK_SUCCESS = "OK";
