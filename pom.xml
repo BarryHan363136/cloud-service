@@ -308,6 +308,7 @@
         <module>cloud-netty-server</module>
         <module>cloud-netty-client</module>
         <module>cloud-redis-distributed-lock</module>
+        <module>cloud-jediscluster</module>
     </modules>
 
 </project>
