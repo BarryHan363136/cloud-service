@@ -8,6 +8,7 @@ package com.barry.cloud.platform.jediscluster.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
@@ -28,17 +29,26 @@ import java.util.Set;
 @ConditionalOnClass({JedisCluster.class})
 public class RedisClusterConfig {
 
-
     @Value("${spring.redis.cluster.nodes}")
     private String clusterNodes;
+
     @Value("${spring.redis.timeout}")
-    private int timeout;
-    @Value("${spring.redis.pool.max-idle}")
-    private int maxIdle;
-    @Value("${spring.redis.pool.max-wait}")
+    private Integer timeout;
+
+    @Value("${spring.redis.jedis.pool.max-active}")
+    private Integer maxActive;
+
+    @Value("${spring.redis.jedis.pool.max-wait}")
     private long maxWaitMillis;
-    @Value("${spring.redis.commandTimeout}")
-    private int commandTimeout;
+
+    @Value("${spring.redis.jedis.pool.max-idle}")
+    private Integer maxIdle;
+
+    @Value("${spring.redis.jedis.pool.min-idle}")
+    private Integer minIdle;
+
+    @Value("${spring.redis.password}")
+    private String password;
 
     @Bean
     public JedisCluster getJedisCluster() {
@@ -49,11 +59,16 @@ public class RedisClusterConfig {
             String[] hp = node.split(":");
             nodes.add(new HostAndPort(hp[0],Integer.parseInt(hp[1])));
         }
+
         JedisPoolConfig jedisPoolConfig =new JedisPoolConfig();
-        jedisPoolConfig.setMaxIdle(maxIdle);
+        jedisPoolConfig.setMaxTotal(maxActive);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
-        /** 创建集群对象 */
-        return new JedisCluster(nodes,commandTimeout,jedisPoolConfig);
+        jedisPoolConfig.setMaxIdle(maxIdle);
+        jedisPoolConfig.setMinIdle(minIdle);
+        /** 创建集群对象,没有密码的请使用这一个 */
+        //return new JedisCluster(nodes,timeout,jedisPoolConfig);
+        /** 创建集群对象,有密码的请使用这一个 */
+        return new JedisCluster(nodes,timeout,3000,10, password, new JedisPoolConfig());
     }
 
     /**
