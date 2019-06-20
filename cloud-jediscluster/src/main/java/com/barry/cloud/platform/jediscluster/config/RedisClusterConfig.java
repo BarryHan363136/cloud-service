@@ -47,8 +47,8 @@ public class RedisClusterConfig {
     @Value("${spring.redis.jedis.pool.min-idle}")
     private Integer minIdle;
 
-    @Value("${spring.redis.password}")
-    private String password;
+    //@Value("${spring.redis.password}")
+    //private String password;
 
     @Bean
     public JedisCluster getJedisCluster() {
@@ -66,9 +66,9 @@ public class RedisClusterConfig {
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMinIdle(minIdle);
         /** 创建集群对象,没有密码的请使用这一个 */
-        //return new JedisCluster(nodes,timeout,jedisPoolConfig);
+        return new JedisCluster(nodes,timeout,jedisPoolConfig);
         /** 创建集群对象,有密码的请使用这一个 */
-        return new JedisCluster(nodes,timeout,3000,10, password, new JedisPoolConfig());
+        //return new JedisCluster(nodes,timeout,3000,10, password, new JedisPoolConfig());
     }
 
     /**
