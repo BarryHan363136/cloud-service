@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.JedisCluster;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,14 +32,18 @@ public class JedisClusterTest {
 
     @Test
     public void testRedisSetData(){
-        redisTemplate.opsForValue().set("testKey", "中国人民解放军");
-        log.info("=======================>");
+        redisTemplate.opsForValue().set("testKey", "中国人民解放军2");
     }
 
     @Test
     public void testRedisStorage(){
-        List list = (List) redisTemplate.opsForHash().get("seckill", 1);
-        log.info("=======================>"+JSON.toJSONString(list));
+        Map map = new HashMap();
+        map.put("name", "张三");
+        map.put("age", 10);
+        redisTemplate.opsForHash().putAll("person", map);
+        log.info("===111=========>"+redisTemplate.opsForHash().values("person"));
+        log.info("===222=========>"+redisTemplate.opsForHash().entries("person"));
+        log.info("===333=========>"+redisTemplate.opsForHash().get("person", "name"));
     }
 
 
