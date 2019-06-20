@@ -31,8 +31,8 @@ public class JedisClusterTest {
 
     @Test
     public void testRedisSetData(){
-        Long h = redisTemplate.opsForSet().add("testKey", "中国人民解放军");
-        log.info("=======================>"+h);
+        redisTemplate.opsForValue().set("testKey", "中国人民解放军");
+        log.info("=======================>");
     }
 
     @Test
