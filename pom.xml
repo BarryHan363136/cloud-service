@@ -309,6 +309,7 @@
         <module>cloud-netty-client</module>
         <module>cloud-redis-distributed-lock</module>
         <module>cloud-jediscluster</module>
+        <module>cloud-simpleimage</module>
     </modules>
 
 </project>
