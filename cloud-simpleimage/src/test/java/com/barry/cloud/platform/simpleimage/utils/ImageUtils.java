@@ -36,7 +36,7 @@ public class ImageUtils {
 
     public static void main(String[] args) {
         // 1.等比例缩放
-         scaleNormal("C:\\Users\\qxv0963\\Desktop\\TempFiles\\ali-simpleimage\\609340448414105600.jfif", "C:\\Users\\qxv0963\\Desktop\\TempFiles\\ali-simpleimage\\001.jpg",339, 341);
+        //scaleNormal("C:\\Users\\qxv0963\\Desktop\\TempFiles\\ali-simpleimage\\609340448414105600.jfif", "C:\\Users\\qxv0963\\Desktop\\TempFiles\\ali-simpleimage\\001.jpg",339, 341);
         // 2.等比例缩放加水印
         // scaleWithWaterMark("D:\\img\\src.jpg",
         // "D:\\img\\scaleWithWaterMark.jpg",720, 1080);
@@ -52,7 +52,7 @@ public class ImageUtils {
         //print(40,20, 4,2);
         //print(20,40, 4,2);
         //print(40,20, 4,3);
-        //scale("C:\\Users\\qxv0963\\Desktop\\TempFiles\\ali-simpleimage\\609340448414105600.jfif", "C:\\Users\\qxv0963\\Desktop\\TempFiles\\ali-simpleimage\\001.jpg",339, 341);
+        scale("C:\\Users\\qxv0963\\Desktop\\TempFiles\\ali-simpleimage\\609340448414105600.jfif", "C:\\Users\\qxv0963\\Desktop\\TempFiles\\ali-simpleimage\\002.jpg",339, 341);
     }
 
     /**
